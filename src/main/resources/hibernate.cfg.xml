@@ -17,18 +17,23 @@
         <property name="hibernate.connection.password"></property>
         <property name="show_sql">true</property>
 
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbmdl.auto">update</property>
+<!--        <property name="hbmdl.auto">update</property>-->
 
         <!-- Specifying Session Context -->
         <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 
         <!-- Mapping With Model Class Containing Annotations -->
-        <mapping class="com.jcg.hibernate.maven.User" />
-        <mapping class="com.jcg.hibernate.maven.Admin" />
-        <mapping class="com.jcg.hibernate.maven.Client" />
+<!--        <mapping class="com.jcg.hibernate.maven.User" />-->
+<!--        <mapping class="com.jcg.hibernate.maven.Admin" />-->
+<!--        <mapping class="com.jcg.hibernate.maven.Client" />-->
+
+        <mapping class="Object.Student" />
+        <mapping class="Object.Information" />
+        <mapping class="Object.Manager" />
+        <mapping class="Object.Parent" />
 
     </session-factory>
 </hibernate-configuration>
