@@ -89,13 +89,13 @@ public class AppMain {
             ex.printStackTrace();
         }
 
-        addUser(101, "Editor 101", "Admin", new Date());
-        addUser(102, "Editor 102", "Admin", new Date());
-
-        addAdmin(1, "Hieu", new Date());
-        addAdmin(2, "Hieu", new Date());
-        addAdmin(3, "Link", new Date());
-        addAdmin(2, "Dang", new Date());
+//        addUser(101, "Editor 101", "Admin", new Date());
+//        addUser(102, "Editor 102", "Admin", new Date());
+//
+//        addAdmin(1, "Hieu", new Date());
+//        addAdmin(2, "Hieu", new Date());
+//        addAdmin(3, "Link", new Date());
+//        addAdmin(2, "Dang", new Date());
 
         if (sessionFactoryObj != null) {
             sessionFactoryObj.close();
