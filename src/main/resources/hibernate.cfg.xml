@@ -12,7 +12,7 @@
 
         <!-- Database Connection Settings -->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/tutorialDb</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/StudentManager</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
         <property name="show_sql">true</property>
@@ -30,10 +30,14 @@
 <!--        <mapping class="com.jcg.hibernate.maven.Admin" />-->
 <!--        <mapping class="com.jcg.hibernate.maven.Client" />-->
 
-        <mapping class="Object.Student" />
-        <mapping class="Object.Information" />
+        <mapping class="Object.Account" />
+        <mapping class="Object.Bill" />
+        <mapping class="Object.Contract" />
+        <mapping class="Object.Dormitory" />
         <mapping class="Object.Manager" />
-        <mapping class="Object.Parent" />
+        <mapping class="Object.Room" />
+        <mapping class="Object.Student" />
+
 
     </session-factory>
 </hibernate-configuration>
