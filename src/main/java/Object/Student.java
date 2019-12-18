@@ -8,73 +8,143 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Student")
+@Table(name="Student")
 public class Student {
     @Id
-    @Column(name = "student_id")
-    private int student_id;
+    @Column(name="Student_ID")
+    private String Student_ID;
 
-    @Column(name = "room")
-    private String room;
+    @Column(name="Contract_ID")
+    private String Contract_ID;
 
-    @Column(name = "building")
-    private String building;
+    @Column(name="Room_ID")
+    private String Room_ID;
 
-    @Column(name = "rent")
-    private double rent;
+    @Column(name="Name")
+    private String Name;
+    @Column(name="Gender")
+    private String Gender;
+    @Column(name="Birthday")
+    private Date Birthday;
 
-    @Column(name = "status")
-    private boolean status;
+    @Column(name="Hometown")
+    private String Hometown;
+
+    @Column(name="Course")
+    private int Course;
+    @Column(name="Faculty")
+    private String Faculty;
+    @Column(name="Educational_System")
+    private String Educational_System;
+    @Column(name="Phone_Number")
+    private String Phone_Number;
 
     public Student() {
 
     }
 
-    public Student(int student_id, String room, String building, double rent, boolean status) {
-        this.student_id = student_id;
-        this.room = room;
-        this.building = building;
-        this.rent = rent;
-        this.status = status;
+    public Student(String student_ID, String contract_ID, String room_ID,
+                   String name, String gender, Date birthday,
+                   String hometown,
+                   int course, String faculty, String educational_System, String phone_Number) {
+        this.Student_ID = student_ID;
+        this.Contract_ID = contract_ID;
+        this.Room_ID = room_ID;
+        this.Name = name;
+        this.Gender = gender;
+        this.Birthday = birthday;
+        this.Hometown = hometown;
+        this.Course = course;
+        this.Faculty = faculty;
+        this.Educational_System = educational_System;
+        this.Phone_Number = phone_Number;
     }
 
-    public int getStudent_id() {
-        return student_id;
+    public String getStudent_ID() {
+        return Student_ID;
     }
 
-    public void setStudent_id(int student_id) {
-        this.student_id = student_id;
+    public void setStudent_ID(String student_ID) {
+        Student_ID = student_ID;
     }
 
-    public String getRoom() {
-        return room;
+    public String getContract_ID() {
+        return Contract_ID;
     }
 
-    public void setRoom(String room) {
-        this.room = room;
+    public void setContract_ID(String contract_ID) {
+        Contract_ID = contract_ID;
     }
 
-    public String getBuilding() {
-        return building;
+    public String getRoom_ID() {
+        return Room_ID;
     }
 
-    public void setBuilding(String building) {
-        this.building = building;
+    public void setRoom_ID(String room_ID) {
+        Room_ID = room_ID;
     }
 
-    public double getRent() {
-        return rent;
+    public String getName() {
+        return Name;
     }
 
-    public void setRent(double rent) {
-        this.rent = rent;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public boolean isStatus() {
-        return status;
+    public String getGender() {
+        return Gender;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setGender(String gender) {
+        Gender = gender;
+    }
+
+    public Date getBirthday() {
+        return Birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        Birthday = birthday;
+    }
+
+    public String getHometown() {
+        return Hometown;
+    }
+
+    public void setHometown(String hometown) {
+        Hometown = hometown;
+    }
+
+    public int getCourse() {
+        return Course;
+    }
+
+    public void setCourse(int course) {
+        Course = course;
+    }
+
+    public String getFaculty() {
+        return Faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        Faculty = faculty;
+    }
+
+    public String getEducational_System() {
+        return Educational_System;
+    }
+
+    public void setEducational_System(String educational_System) {
+        Educational_System = educational_System;
+    }
+
+    public String getPhone_Number() {
+        return Phone_Number;
+    }
+
+    public void setPhone_Number(String phone_Number) {
+        Phone_Number = phone_Number;
     }
 }

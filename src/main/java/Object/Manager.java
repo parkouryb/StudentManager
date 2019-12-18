@@ -11,46 +11,66 @@ import javax.persistence.Table;
 @Table(name = "Manager")
 public class Manager {
     @Id
-    @Column(name = "manager_id")
-    private int manager_id;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "building")
-    private String building;
+    @Column(name = "Manager_ID")
+    private String Manager_ID;
+    @Column(name = "Name")
+    private String Name;
+    @Column(name = "Birthday")
+    private Date Birthday;
+    @Column(name = "Gender")
+    private String Gender;
+    @Column(name = "Position")
+    private String Position;
 
     public Manager() {
 
     }
 
-    public Manager(int manager_id, String name, String building) {
-        this.manager_id = manager_id;
-        this.name = name;
-        this.building = building;
+    public Manager(String manager_ID, String name, Date birthday, String gender, String position) {
+        Manager_ID = manager_ID;
+        Name = name;
+        Birthday = birthday;
+        Gender = gender;
+        Position = position;
     }
 
-    public int getManager_id() {
-        return manager_id;
+    public String getManager_ID() {
+        return Manager_ID;
     }
 
-    public void setManager_id(int manager_id) {
-        this.manager_id = manager_id;
+    public void setManager_ID(String manager_ID) {
+        Manager_ID = manager_ID;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
-    public String getBuilding() {
-        return building;
+    public Date getBirthday() {
+        return Birthday;
     }
 
-    public void setBuilding(String building) {
-        this.building = building;
+    public void setBirthday(Date birthday) {
+        Birthday = birthday;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String gender) {
+        Gender = gender;
+    }
+
+    public String getPosition() {
+        return Position;
+    }
+
+    public void setPosition(String position) {
+        Position = position;
     }
 }
