@@ -147,4 +147,21 @@ public class Student {
     public void setPhone_Number(String phone_Number) {
         Phone_Number = phone_Number;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "Student_ID='" + Student_ID + '\'' +
+                ", Contract_ID='" + Contract_ID + '\'' +
+                ", Room_ID='" + Room_ID + '\'' +
+                ", Name='" + Name + '\'' +
+                ", Gender='" + Gender + '\'' +
+                ", Birthday=" + Birthday +
+                ", Hometown='" + Hometown + '\'' +
+                ", Course=" + Course +
+                ", Faculty='" + Faculty + '\'' +
+                ", Educational_System='" + Educational_System + '\'' +
+                ", Phone_Number='" + Phone_Number + '\'' +
+                '}';
+    }
 }
