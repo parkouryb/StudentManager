@@ -91,8 +91,14 @@ public class AppMain {
         }
 
         AccountIT ait = new AccountIT();
-        ait.Registration("parkouryb", "parkour", "parkour");
+//        ait.Registration("parkouryb1", "parkour", "parkour");
+//        ait.Registration("parkouryb2", "parkour", "parkour");
+//        ait.Registration("parkouryb3", "parkour", "parkour");
+//        ait.Registration("parkouryb4", "parkour", "parkour");
 
+//        ait.Login("parkouryb", "parkour12345");
+//        ait.changePassword("parkouryb", "assdasdas", "12", "12");
+        ait.deleteAccount("parkouryb");
         if (sessionFactoryObj != null) {
             sessionFactoryObj.close();
             System.out.println("SessionFactory is closed!");
