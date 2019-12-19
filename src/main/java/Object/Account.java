@@ -51,4 +51,13 @@ public class Account  {
     public void setCreation_date(Date creation_date) {
         this.creation_date = creation_date;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", creation_date=" + creation_date +
+                '}';
+    }
 }
