@@ -18,6 +18,12 @@ public class AccountIT {
 
     static SessionFactory sessionFactoryObj;
 
+    /**
+     * Registration account with username and password
+     * @param username
+     * @param password
+     * @param re_password
+     */
     public void Registration(String username, String password, String re_password) {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
@@ -57,6 +63,9 @@ public class AccountIT {
         System.out.println("Registion completed!");
     }
 
+    /**
+     * List all accounts in the database
+     */
     public void listAccount() {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
@@ -83,6 +92,11 @@ public class AccountIT {
         }
     }
 
+    /**
+     * Login with username and password
+     * @param username
+     * @param password
+     */
     public void Login(String username, String password) {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
@@ -117,6 +131,13 @@ public class AccountIT {
 
     }
 
+    /**
+     * change Password
+     * @param username
+     * @param old_password
+     * @param new_password
+     * @param re_new_password
+     */
     public void changePassword(String username, String old_password, String new_password, String re_new_password) {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
@@ -164,6 +185,10 @@ public class AccountIT {
         }
     }
 
+    /**
+     * delete Account in the database
+     * @param username
+     */
     public void deleteAccount(String username) {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
