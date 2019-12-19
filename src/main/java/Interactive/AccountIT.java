@@ -161,6 +161,7 @@ public class AccountIT {
                 }
                 else {
                     System.out.println("re_new_password not the same with new_password");
+                    System.out.println("hieu dep trai");
                 }
             }
             else {

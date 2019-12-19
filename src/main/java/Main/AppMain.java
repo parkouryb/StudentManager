@@ -25,22 +25,22 @@ public class AppMain {
 //                String name, String gender, Date birthday,
 //                String hometown,
 //        int course, String faculty, String educational_System, String phone_Number
-//        studentIT.addStudent("18001132", "1231", "513",
-//                "Ha Trung Hieu", "Male", new Date(),
-//                "Yen Bai",
-//                2018, "abc", "xyz", "0915866167");
-//        studentIT.addStudent("18001133", "1231", "513",
-//                "Trung Hieu", "feMale", new Date(),
-//                "Yen Bai",
-//                2018, "abc", "xyz", "0915866167");
-        studentIT.deleteStudent("18001132");
-        List <Student> lists = studentIT.searchStudentbyName("Ha Trung Hieu");
-        if (lists != null) {
-            for (Student std : lists) {
-                System.out.println(std.toString());
-            }
-        }
-        else System.out.println("nothing");
+        studentIT.addStudent("18001132", "1231", "513",
+                "Ha Trung Hieu", "Male", new Date(),
+                "Yen Bai",
+                2018, "abc", "xyz", "0915866167");
+        studentIT.addStudent("18001133", "1231", "513",
+                "Trung Hieu", "feMale", new Date(),
+                "Yen Bai",
+                2018, "abc", "xyz", "0915866167");
+//        studentIT.deleteStudent("18001132");
+//        List <Student> lists = studentIT.searchStudentbyName("Ha Trung Hieu");
+//        if (lists != null) {
+//            for (Student std : lists) {
+//                System.out.println(std.toString());
+//            }
+//        }
+//        else System.out.println("nothing");
 
     }
 }
