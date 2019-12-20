@@ -76,4 +76,28 @@ public class ManagerIT {
             sessionFactoryObj.close();
         }
     }
+
+    public Manager searchManager(String manager_ID) {
+        try {
+            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
+
+        Session sessionObj = sessionFactoryObj.openSession();
+        Manager manager = null;
+        try {
+            manager = (Manager) sessionObj.get(Manager.class.getName(), manager_ID);
+
+        } catch(HibernateException hibernateExeption) {
+            System.out.println("error\n");
+        }finally {
+            sessionObj.close();
+        }
+
+        if (sessionFactoryObj != null) {
+            sessionFactoryObj.close();
+        }
+        return manager;
+    }
 }
