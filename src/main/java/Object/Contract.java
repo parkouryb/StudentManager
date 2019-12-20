@@ -2,10 +2,7 @@ package Object;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="Contract")
@@ -20,6 +17,10 @@ public class Contract {
     private Date Day_out = null;
     @Column(name = "creation_date")
     private Date creation_date;
+
+    @OneToOne
+    private Student student;
+
 
     public Contract() {
 

@@ -1,11 +1,11 @@
 package Object;
 
+import org.hibernate.annotations.ManyToAny;
+
+import java.util.ArrayList;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="Room")
@@ -17,6 +17,12 @@ public class Room {
     private int Type_room;
     @Column(name = "Room_money")
     private float Room_money;
+
+    @OneToMany
+    private List<Student> students = new ArrayList<Student>();
+
+    @ManyToOne
+    private Dormitory dorm;
 
     public Room() {
     }

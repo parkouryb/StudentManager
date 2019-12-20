@@ -2,10 +2,7 @@ package Object;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Bill")
@@ -28,6 +25,9 @@ public class Bill {
 
     @Column(name="Collection_date")
     private Date Collection_date = null;
+
+    @OneToOne
+    private Student student;
 
     public Bill() {
 

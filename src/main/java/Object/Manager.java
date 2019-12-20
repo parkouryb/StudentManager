@@ -2,10 +2,7 @@ package Object;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Manager")
@@ -21,6 +18,12 @@ public class Manager {
     private String Gender;
     @Column(name = "Position")
     private String Position;
+
+    @ManyToOne
+    private Dormitory dorm;
+
+    @OneToMany
+    private List<Student> students = new ArrayList<Student>();
 
     public Manager() {
 
