@@ -4,10 +4,12 @@ import java.util.Date;
 import Object.Contract;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class ContractIT {
+    static SessionFactory sessionFactoryObj;
     public void addContract(String contract_ID, Date day_in, Date day_out, Date creation_date) {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();

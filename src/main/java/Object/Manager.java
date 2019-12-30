@@ -1,6 +1,8 @@
 package Object;
 
 import java.util.Date;
+import java.util.*;
+import java.io.*;
 
 import javax.persistence.*;
 
@@ -19,11 +21,11 @@ public class Manager {
     @Column(name = "Position")
     private String Position;
 
-    @ManyToOne
-    private Dormitory dorm;
-
-    @OneToMany
-    private List<Student> students = new ArrayList<Student>();
+//    @ManyToOne
+//    private Dormitory dorm;
+//
+//    @OneToMany
+//    private List<Student> students = new ArrayList<Student>();
 
     public Manager() {
 

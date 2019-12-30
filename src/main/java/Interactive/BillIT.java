@@ -2,6 +2,7 @@ package Interactive;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import Object.Bill;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 public class BillIT {
+    static SessionFactory sessionFactoryObj;
     public void setBill(String bill_ID, String student_ID, String bill_NAME,
                 float room_money, float water_money, float total_money,
                 Date collection_date) {
@@ -36,7 +38,7 @@ public class BillIT {
             }
             System.out.println("error");
         } catch(NullPointerException np) {
-            System.out.println("not exist account to delete!");
+            // to do somethings
         } finally {
             sessionObj.close();
         }
@@ -71,7 +73,7 @@ public class BillIT {
             }
             System.out.println("error");
         } catch(NullPointerException np) {
-            System.out.println("not exist account to delete!");
+            // to do somethings
         } finally {
             sessionObj.close();
         }
@@ -105,7 +107,7 @@ public class BillIT {
             }
             System.out.println("error");
         } catch(NullPointerException np) {
-            System.out.println("not exist account to delete!");
+            // to do somethings
         } finally {
             sessionObj.close();
         }

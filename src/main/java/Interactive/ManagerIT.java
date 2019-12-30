@@ -2,6 +2,7 @@ package Interactive;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
@@ -9,6 +10,7 @@ import Object.Manager;
 import java.util.Date;
 
 public class ManagerIT {
+    static SessionFactory sessionFactoryObj;
     public void addManager(String manager_ID, String name, Date birthday, String gender, String position) {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();

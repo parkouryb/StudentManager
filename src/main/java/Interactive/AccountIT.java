@@ -41,6 +41,7 @@ public class AccountIT {
                 Account new_user = new Account(username, password, creation_date);
 
                 sessionObj.save(new_user);
+
             }
             else {
                 System.out.println("Registion incomplete!");

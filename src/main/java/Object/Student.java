@@ -5,6 +5,9 @@ import java.util.Date;
 import javax.persistence.*;
 
 import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
+
 
 @Entity
 @Table(name="Student")
@@ -19,17 +22,17 @@ public class Student {
     @Column(name="Room_ID")
     private String Room_ID;
 
-    @ManyToOne
-    private Room room;
-
-    @ManyToOne
-    private Manager manager;
-
-    @OneToOne
-    private Bill bill;
-
-    @OneToOne
-    private Contract contract;
+//    @ManyToOne
+//    private Room room;
+//
+//    @ManyToOne
+//    private Manager manager;
+//
+//    @OneToOne
+//    private Bill bill;
+//
+//    @OneToOne
+//    private Contract contract;
 
 
     @Column(name="Name")

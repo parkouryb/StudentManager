@@ -2,6 +2,7 @@ package Interactive;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DormitoryIT {
+    static SessionFactory sessionFactoryObj;
     public void addDorm(String dorm_name, String location, String phone_number) {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();

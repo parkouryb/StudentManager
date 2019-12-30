@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.*;
+import java.util.*;
+import java.io.*;
+
 
 @Entity
 @Table(name="Room")
@@ -18,11 +21,11 @@ public class Room {
     @Column(name = "Room_money")
     private float Room_money;
 
-    @OneToMany
-    private List<Student> students = new ArrayList<Student>();
-
-    @ManyToOne
-    private Dormitory dorm;
+//    @OneToMany
+//    private List<Student> students = new ArrayList<Student>();
+//
+//    @ManyToOne
+//    private Dormitory dorm;
 
     public Room() {
     }

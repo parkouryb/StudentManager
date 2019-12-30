@@ -2,6 +2,7 @@ package Interactive;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 import Object.Room;
 
 public class RoomIT {
-
+    static SessionFactory sessionFactoryObj;
     public void addRoom(String room_ID, int type_room, float room_money) {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
@@ -23,7 +24,7 @@ public class RoomIT {
         try {
             transaction = sessionObj.beginTransaction();
 
-            Room room = new Contract(room_ID, type_room, room_money);
+            Room room = new Room(room_ID, type_room, room_money);
             sessionObj.save(room);
 
             transaction.commit();

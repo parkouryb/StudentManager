@@ -3,6 +3,9 @@ package Object;
 import java.util.Date;
 
 import javax.persistence.*;
+import java.util.*;
+import java.io.*;
+
 
 @Entity
 @Table(name="Contract")
@@ -18,8 +21,8 @@ public class Contract {
     @Column(name = "creation_date")
     private Date creation_date;
 
-    @OneToOne
-    private Student student;
+//    @OneToOne
+//    private Student student;
 
 
     public Contract() {

@@ -3,6 +3,10 @@ package Object;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.persistence.OneToOne;
+
+import java.util.*;
+import java.io.*;
 
 @Entity
 @Table(name = "Bill")
@@ -26,8 +30,8 @@ public class Bill {
     @Column(name="Collection_date")
     private Date Collection_date = null;
 
-    @OneToOne
-    private Student student;
+//    @OneToOne
+//    private Student student;
 
     public Bill() {
 
