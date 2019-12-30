@@ -16,8 +16,8 @@ public class Contract {
     @Column(name = "Day_out")
     private Date Day_out = null;
 
-    @OneToOne
-    private Student student;
+//    @OneToOne
+//    private Student student;
 
 
     public Contract() {

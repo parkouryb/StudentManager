@@ -21,11 +21,11 @@ public class Manager {
     @Column(name = "Position")
     private String Position;
 
-    @ManyToOne
-    private Dormitory dorm;
-
-    @OneToMany
-    private List<Student> students = new ArrayList<Student>();
+//    @ManyToOne
+//    private Dormitory dorm;
+//
+//    @OneToMany
+//    private List<Student> students = new ArrayList<Student>();
 
     public Manager() {
 

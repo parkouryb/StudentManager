@@ -50,32 +50,63 @@ public class StudentIT {
 			e.printStackTrace();
 		}
     }
-    
+
     public static void addStudent(Student std) {
-    	String sqlString = "INSERT INTO student(Student_ID, Name, Gender, Birthday, Educational_System,"
-    			+ "Faculty, Hometown,Phone_Number, Room_ID, Contract_ID, Course, Status)"
-    						+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-    	try {
-    		PreparedStatement ps =	sqlConnection.getconnection().prepareStatement(sqlString);
-    		ps.setString(1, std.getStudent_ID());
-    		ps.setString(2, std.getName());
-    		ps.setString(3, std.getGender());
-    		java.sql.Date cal = new java.sql.Date (std.getBirthday().getTime()) ;
-			ps.setDate(4, cal);
-			ps.setString(5, std.getEducational_System());
-			ps.setString(6, std.getFaculty());
-			ps.setString(7, std.getHometown());
-			ps.setString(8, std.getPhone_Number());
-			ps.setString(9, std.getRoom_ID());
-			ps.setString(10, std.getContract_ID());
-			ps.setInt(11, std.getCourse());
-			ps.setString(12, std.getStatus());
-			
-			ps.executeUpdate();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+        String sqlString = "INSERT INTO student(Student_ID, Name, Gender, Birthday, Educational_System,"
+                + "Faculty, Hometown,Phone_Number, Room_ID, Contract_ID, Course, Status)"
+                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps =	sqlConnection.getconnection().prepareStatement(sqlString);
+            ps.setString(1, std.getStudent_ID());
+            ps.setString(2, std.getName());
+            ps.setString(3, std.getGender());
+            java.sql.Date cal = new java.sql.Date (std.getBirthday().getTime()) ;
+            ps.setDate(4, cal);
+            ps.setString(5, std.getEducational_System());
+            ps.setString(6, std.getFaculty());
+            ps.setString(7, std.getHometown());
+            ps.setString(8, std.getPhone_Number());
+            ps.setString(9, std.getRoom_ID());
+            ps.setString(10, std.getContract_ID());
+            ps.setInt(11, std.getCourse());
+            ps.setString(12, std.getStatus());
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+
+    public void addStudent_hbn(Student new_student) {
+        try {
+            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
+
+        Session sessionObj = sessionFactoryObj.openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = sessionObj.beginTransaction();
+
+            sessionObj.save(new_student);
+
+            transaction.commit();
+        } catch(HibernateException hibernateExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+//            System.out.print("This student id : " + student_ID + " already exist!\n");
+            System.out.println("Add a student fail!");
+        } finally {
+            sessionObj.close();
+        }
+
+        if (sessionFactoryObj != null) {
+            sessionFactoryObj.close();
+        }
     }
 
     /**

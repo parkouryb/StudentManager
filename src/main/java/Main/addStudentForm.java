@@ -521,7 +521,7 @@ public class addStudentForm extends JFrame implements ActionListener {
 			statusTF.setText("FALSE");
 		}
 		else if(btn.equals(contractBtn)) {
-			if(contract_idTF.getText().length()==0) {
+			if(student_idTF.getText().length()==0) {
 				showMess("Fill your StudentID,please!");
 			}
 			else {
@@ -570,7 +570,9 @@ public class addStudentForm extends JFrame implements ActionListener {
 			std.setStatus(statusTF.getText());
 			
 			sqlConnection.getconnection();
-			StudentIT.addStudent(std);
+			StudentIT sit = new StudentIT();
+			sit.addStudent_hbn(std);
+//			StudentIT.addStudent(std);
 			showMess("Adding successfully!");
 			check = true;
 		}

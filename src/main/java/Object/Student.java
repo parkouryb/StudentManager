@@ -19,17 +19,17 @@ public class Student {
     @Column(name="Room_ID")
     private String Room_ID;
 
-    @ManyToOne
-    private Room room;
-
-    @ManyToOne
-    private Manager manager;
-
-    @OneToOne
-    private Bill bill;
-
-    @OneToOne
-    private Contract contract;
+//    @ManyToOne
+//    private Room room;
+//
+//    @ManyToOne
+//    private Manager manager;
+//
+//    @OneToOne
+//    private Bill bill;
+//
+//    @OneToOne
+//    private Contract contract;
 
 
     @Column(name="Name")

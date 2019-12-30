@@ -24,8 +24,8 @@ public class Bill {
     private float Total_money;
 
 
-    @OneToOne
-    private Student student;
+//    @OneToOne
+//    private Student student;
 
     public Bill() {
 

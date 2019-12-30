@@ -17,11 +17,11 @@ public class Dormitory {
     @Column(name = "Phone_number")
     private String Phone_number;
 
-    @OneToMany
-    private List<Room> rooms = new ArrayList<Room>();
-
-    @OneToMany
-    private List<Manager> managers = new ArrayList<Manager>();
+//    @OneToMany
+//    private List<Room> rooms = new ArrayList<Room>();
+//
+//    @OneToMany
+//    private List<Manager> managers = new ArrayList<Manager>();
 
 
     public Dormitory() {
