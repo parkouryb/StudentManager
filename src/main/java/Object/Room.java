@@ -4,11 +4,9 @@ import org.hibernate.annotations.ManyToAny;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
-import java.util.*;
-import java.io.*;
-
 
 @Entity
 @Table(name="Room")
@@ -17,9 +15,11 @@ public class Room {
     @Column(name = "Room_ID")
     private String Room_ID;
     @Column(name = "Type_room")
-    private int Type_room;
+    private String Type_room;
     @Column(name = "Room_money")
     private float Room_money;
+    @Column(name = "Number")
+    private int Number;
 
 //    @OneToMany
 //    private List<Student> students = new ArrayList<Student>();
@@ -30,7 +30,7 @@ public class Room {
     public Room() {
     }
 
-    public Room(String room_ID, int type_room, float room_money) {
+    public Room(String room_ID, String type_room, float room_money) {
         Room_ID = room_ID;
         Type_room = type_room;
         Room_money = room_money;
@@ -44,11 +44,11 @@ public class Room {
         Room_ID = room_ID;
     }
 
-    public int getType_room() {
+    public String getType_room() {
         return Type_room;
     }
 
-    public void setType_room(int type_room) {
+    public void setType_room(String type_room) {
         Type_room = type_room;
     }
 
@@ -59,4 +59,12 @@ public class Room {
     public void setRoom_money(float room_money) {
         Room_money = room_money;
     }
+
+    public int getNumber() {
+		return Number;
+	}
+
+    public void setNumber(int number) {
+		Number = number;
+	}
 }

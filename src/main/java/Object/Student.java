@@ -5,9 +5,6 @@ import java.util.Date;
 import javax.persistence.*;
 
 import java.util.ArrayList;
-import java.util.*;
-import java.io.*;
-
 
 @Entity
 @Table(name="Student")
@@ -53,6 +50,8 @@ public class Student {
     private String Educational_System;
     @Column(name="Phone_Number")
     private String Phone_Number;
+    @Column(name="Status")
+    private String Status;
 
     public Student() {
 
@@ -61,7 +60,8 @@ public class Student {
     public Student(String student_ID, String contract_ID, String room_ID,
                    String name, String gender, Date birthday,
                    String hometown,
-                   int course, String faculty, String educational_System, String phone_Number) {
+                   int course, String faculty, String educational_System, String phone_Number,
+                   String status) {
         this.Student_ID = student_ID;
         this.Contract_ID = contract_ID;
         this.Room_ID = room_ID;
@@ -73,6 +73,7 @@ public class Student {
         this.Faculty = faculty;
         this.Educational_System = educational_System;
         this.Phone_Number = phone_Number;
+        this.Status = status;
     }
 
     public String getStudent_ID() {
@@ -162,6 +163,14 @@ public class Student {
     public void setPhone_Number(String phone_Number) {
         Phone_Number = phone_Number;
     }
+
+    public void setStatus(String status) {
+		Status = status;
+	}
+
+    public String getStatus() {
+		return Status;
+	}
 
     @Override
     public String toString() {

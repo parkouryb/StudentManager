@@ -2,11 +2,9 @@ package Object;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
-import java.util.*;
-import java.io.*;
-
 
 @Entity
 @Table(name = "Dormitory")
