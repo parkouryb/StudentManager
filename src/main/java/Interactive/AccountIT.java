@@ -18,6 +18,20 @@ public class AccountIT {
 
     static SessionFactory sessionFactoryObj;
 
+    public void openSSF() {
+        try {
+            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void closeSSF() {
+        if (sessionFactoryObj != null) {
+            sessionFactoryObj.close();
+        }
+    }
+
     /**
      * Registration account with username and password
      * @param username
@@ -25,54 +39,39 @@ public class AccountIT {
      * @param re_password
      */
     public void Registration(String username, String password, String re_password) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
+        boolean flag = true;
 
         try {
             transaction = sessionObj.beginTransaction();
             if (password.compareTo(re_password) == 0) {
-                Date creation_date = new Date();
-                Account new_user = new Account(username, password, creation_date);
+
+                Account new_user = new Account(username, password);
 
                 sessionObj.save(new_user);
 
             }
-            else {
-                System.out.println("Registion incomplete!");
-            }
+
             transaction.commit();
         } catch(HibernateException hibernateExeption) {
             if (transaction != null) {
                 transaction.rollback();
             }
             System.out.print("This username : " + username + " already exist!\n");
-            System.out.println("Registion incomplete!");
+            flag = false;
         } finally {
             sessionObj.close();
         }
-
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
-
-        System.out.println("Registion completed!");
+        if (flag) System.out.println("Registion completed!");
+        else System.out.println("Registion incomplete!");
     }
 
     /**
      * List all accounts in the database
      */
     public void listAccount() {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         try {
@@ -88,9 +87,6 @@ public class AccountIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
     }
 
     /**
@@ -99,11 +95,6 @@ public class AccountIT {
      * @param password
      */
     public void Login(String username, String password) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -126,10 +117,6 @@ public class AccountIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
-
     }
 
     /**
@@ -140,11 +127,6 @@ public class AccountIT {
      * @param re_new_password
      */
     public void changePassword(String username, String old_password, String new_password, String re_new_password) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -182,9 +164,6 @@ public class AccountIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
     }
 
     /**
@@ -192,12 +171,6 @@ public class AccountIT {
      * @param username
      */
     public void deleteAccount(String username) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
-
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
 
@@ -205,10 +178,11 @@ public class AccountIT {
             transaction = sessionObj.beginTransaction();
 
             Account account = (Account) sessionObj.get(Account.class.getName(), username);
-            System.out.println(account.toString());
+
             sessionObj.flush();
             sessionObj.delete(account);
             sessionObj.flush();
+
             transaction.commit();
 
         } catch(HibernateException hibernateExeption) {
@@ -222,8 +196,5 @@ public class AccountIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
     }
 }

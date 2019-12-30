@@ -10,12 +10,22 @@ import org.hibernate.cfg.Configuration;
 
 public class ContractIT {
     static SessionFactory sessionFactoryObj;
-    public void addContract(String contract_ID, Date day_in, Date day_out, Date creation_date) {
+
+    public void openSSF() {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void closeSSF() {
+        if (sessionFactoryObj != null) {
+            sessionFactoryObj.close();
+        }
+    }
+
+    public void addContract(String contract_ID, Date day_in, Date day_out) {
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -23,7 +33,7 @@ public class ContractIT {
         try {
             transaction = sessionObj.beginTransaction();
 
-            Contract contract = new Contract(contract_ID, day_in, day_out, creation_date);
+            Contract contract = new Contract(contract_ID, day_in, day_out);
             sessionObj.save(contract);
 
             transaction.commit();
@@ -33,17 +43,9 @@ public class ContractIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
     }
 
     public void deleteContract(String contract_ID) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -67,18 +69,9 @@ public class ContractIT {
         } finally {
             sessionObj.close();
         }
-
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
     }
 
     public Contract searchContract(String contract_ID) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Contract contract = null;
@@ -91,9 +84,6 @@ public class ContractIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
         return contract;
 
     }

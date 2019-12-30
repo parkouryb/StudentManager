@@ -11,12 +11,22 @@ import Object.Room;
 
 public class RoomIT {
     static SessionFactory sessionFactoryObj;
-    public void addRoom(String room_ID, int type_room, float room_money) {
+
+    public void openSSF() {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void closeSSF() {
+        if (sessionFactoryObj != null) {
+            sessionFactoryObj.close();
+        }
+    }
+
+    public void addRoom(String room_ID, String type_room, float room_money, int Number) {
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -24,7 +34,7 @@ public class RoomIT {
         try {
             transaction = sessionObj.beginTransaction();
 
-            Room room = new Room(room_ID, type_room, room_money);
+            Room room = new Room(room_ID, type_room, room_money, Number);
             sessionObj.save(room);
 
             transaction.commit();
@@ -34,17 +44,9 @@ public class RoomIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
     }
 
     public void deleteRoom(String room_ID) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -69,17 +71,9 @@ public class RoomIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
     }
 
     public Room searchRoom(String room_ID) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Room room = null;
@@ -92,9 +86,6 @@ public class RoomIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
         return room;
 
     }

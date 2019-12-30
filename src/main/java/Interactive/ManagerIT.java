@@ -11,12 +11,22 @@ import java.util.Date;
 
 public class ManagerIT {
     static SessionFactory sessionFactoryObj;
-    public void addManager(String manager_ID, String name, Date birthday, String gender, String position) {
+
+    public void openSSF() {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void closeSSF() {
+        if (sessionFactoryObj != null) {
+            sessionFactoryObj.close();
+        }
+    }
+
+    public void addManager(String manager_ID, String name, Date birthday, String gender, String position) {
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -37,18 +47,9 @@ public class ManagerIT {
         } finally {
             sessionObj.close();
         }
-
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
     }
 
     public void deleteManager(String manager_ID)  {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -74,17 +75,9 @@ public class ManagerIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
     }
 
     public Manager searchManager(String manager_ID) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Manager manager = null;
@@ -97,9 +90,6 @@ public class ManagerIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
         return manager;
     }
 }

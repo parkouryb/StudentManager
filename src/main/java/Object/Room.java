@@ -30,10 +30,11 @@ public class Room {
     public Room() {
     }
 
-    public Room(String room_ID, String type_room, float room_money) {
+    public Room(String room_ID, String type_room, float room_money, int number) {
         Room_ID = room_ID;
         Type_room = type_room;
         Room_money = room_money;
+        Number = number;
     }
 
     public String getRoom_ID() {

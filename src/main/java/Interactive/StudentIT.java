@@ -15,29 +15,21 @@ public class StudentIT {
 
     static SessionFactory sessionFactoryObj;
 
-    /**
-     * Add a student to the database
-     * @param student_ID
-     * @param contract_ID
-     * @param room_ID
-     * @param name
-     * @param gender
-     * @param birthday
-     * @param hometown
-     * @param course
-     * @param faculty
-     * @param educational_System
-     * @param phone_Number
-     */
-    public void addStudent(String student_ID, String contract_ID, String room_ID,
-                           String name, String gender, Date birthday,
-                           String hometown,
-                           int course, String faculty, String educational_System, String phone_Number) {
+    public void openSSF() {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void closeSSF() {
+        if (sessionFactoryObj != null) {
+            sessionFactoryObj.close();
+        }
+    }
+
+    public void addStudent(Student new_student) {
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -45,9 +37,6 @@ public class StudentIT {
         try {
             transaction = sessionObj.beginTransaction();
 
-            Student new_student = new Student(student_ID, contract_ID, room_ID,
-                                              name, gender, birthday,
-                                              hometown, course, faculty, educational_System, phone_Number);
             sessionObj.save(new_student);
 
             transaction.commit();
@@ -55,15 +44,13 @@ public class StudentIT {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.print("This student id : " + student_ID + " already exist!\n");
+            System.out.print("This student id : " + new_student.getStudent_ID() + " already exist!\n");
             System.out.println("Add a student fail!");
         } finally {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
+
     }
 
     /**
@@ -72,11 +59,6 @@ public class StudentIT {
      * @return List of student could found
      */
     public List<Student> searchStudentbyName(String name) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         List<Student> res = new ArrayList<Student>();
@@ -95,11 +77,31 @@ public class StudentIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
         if (res.size() > 0) return res;
         else return null;
+    }
+
+    public Student searchStudentbyID(String StudentID) {
+
+        Session sessionObj = sessionFactoryObj.openSession();
+        Student res = new Student();
+
+        try {
+            List<Student> lists = sessionObj.createCriteria(Student.class).list();
+
+            for (Student std : lists) {
+                if (std.getStudent_ID().compareTo(StudentID) == 0) {
+//                    System.out.println(std.toString());
+                    res = std;
+                    break;
+                }
+            }
+
+        } finally {
+            sessionObj.close();
+        }
+
+        return res;
     }
 
     /**
@@ -107,11 +109,6 @@ public class StudentIT {
      * @param student_ID
      */
     public void deleteStudent(String student_ID){
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -120,7 +117,7 @@ public class StudentIT {
             transaction = sessionObj.beginTransaction();
 
             Student student = (Student) sessionObj.get(Student.class.getName(), student_ID);
-//            System.out.println(account.toString());
+
             sessionObj.flush();
             sessionObj.delete(student);
             sessionObj.flush();
@@ -137,9 +134,6 @@ public class StudentIT {
             sessionObj.close();
         }
 
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
     }
 
 }

@@ -20,9 +20,11 @@ public class AppMain {
      * @param args
      */
     public static void main(String[] args) {
-        AccountIT ait = new AccountIT();
-        ait.Registration("abc", "abc123", "abc123");
-        ait.listAccount();
+        RoomIT rit = new RoomIT();
+        rit.openSSF();;
+        rit.addRoom("1", "1", 1, 12);
+        rit.searchRoom("1");
+        rit.closeSSF();
     }
 }
 

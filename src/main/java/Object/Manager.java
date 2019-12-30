@@ -78,4 +78,15 @@ public class Manager {
     public void setPosition(String position) {
         Position = position;
     }
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "Manager_ID='" + Manager_ID + '\'' +
+                ", Name='" + Name + '\'' +
+                ", Birthday=" + Birthday +
+                ", Gender='" + Gender + '\'' +
+                ", Position='" + Position + '\'' +
+                '}';
+    }
 }
