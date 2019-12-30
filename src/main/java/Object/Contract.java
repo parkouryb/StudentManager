@@ -15,8 +15,6 @@ public class Contract {
     private Date Day_in;
     @Column(name = "Day_out")
     private Date Day_out = null;
-    @Column(name = "creation_date")
-    private Date creation_date;
 
     @OneToOne
     private Student student;
@@ -26,11 +24,10 @@ public class Contract {
 
     }
 
-    public Contract(String contract_ID, Date day_in, Date day_out, Date creation_date) {
+    public Contract(String contract_ID, Date day_in, Date day_out) {
         Contract_ID = contract_ID;
         Day_in = day_in;
         Day_out = day_out;
-        this.creation_date = creation_date;
     }
 
     public String getContract_ID() {
@@ -57,11 +54,4 @@ public class Contract {
         Day_out = day_out;
     }
 
-    public Date getCreation_date() {
-        return creation_date;
-    }
-
-    public void setCreation_date(Date creation_date) {
-        this.creation_date = creation_date;
-    }
 }

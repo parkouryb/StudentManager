@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.*;
 
+import java.sql.PreparedStatement;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -24,44 +25,43 @@ public class AccountIT {
      * @param password
      * @param re_password
      */
-    public void Registration(String username, String password, String re_password) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
-
-        Session sessionObj = sessionFactoryObj.openSession();
-        Transaction transaction = null;
-
-        try {
-            transaction = sessionObj.beginTransaction();
-            if (password.compareTo(re_password) == 0) {
-                Date creation_date = new Date();
-                Account new_user = new Account(username, password, creation_date);
-
-                sessionObj.save(new_user);
-            }
-            else {
-                System.out.println("Registion incomplete!");
-            }
-            transaction.commit();
-        } catch(HibernateException hibernateExeption) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            System.out.print("This username : " + username + " already exist!\n");
-            System.out.println("Registion incomplete!");
-        } finally {
-            sessionObj.close();
-        }
-
-        if (sessionFactoryObj != null) {
-            sessionFactoryObj.close();
-        }
-
-        System.out.println("Registion completed!");
+    public static void addAccount(Account acc) {
+    	String sqlString = "INSERT INTO account(username, password) VALUES(?,?)";
+    	try {
+    		PreparedStatement ps =	sqlConnection.getconnection().prepareStatement(sqlString);
+    		ps.setString(1, acc.getUsername());
+    		ps.setString(2, acc.getPassword());
+    		ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
     }
+    
+	/*
+	 * public void Registration(String username, String password, String
+	 * re_password) { try { sessionFactoryObj = new
+	 * Configuration().configure().buildSessionFactory(); } catch (Throwable ex) {
+	 * ex.printStackTrace(); }
+	 * 
+	 * Session sessionObj = sessionFactoryObj.openSession(); Transaction transaction
+	 * = null;
+	 * 
+	 * try { transaction = sessionObj.beginTransaction(); if
+	 * (password.compareTo(re_password) == 0) { Date creation_date = new Date();
+	 * Account new_user = new Account(username, password);
+	 * 
+	 * sessionObj.save(new_user); } else {
+	 * System.out.println("Registion incomplete!"); } transaction.commit(); }
+	 * catch(HibernateException hibernateExeption) { if (transaction != null) {
+	 * transaction.rollback(); } System.out.print("This username : " + username +
+	 * " already exist!\n"); System.out.println("Registion incomplete!"); } finally
+	 * { sessionObj.close(); }
+	 * 
+	 * if (sessionFactoryObj != null) { sessionFactoryObj.close(); }
+	 * 
+	 * System.out.println("Registion completed!"); }
+	 */
 
     /**
      * List all accounts in the database

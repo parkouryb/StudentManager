@@ -23,8 +23,6 @@ public class Bill {
     @Column(name="Total_money")
     private float Total_money;
 
-    @Column(name="Collection_date")
-    private Date Collection_date = null;
 
     @OneToOne
     private Student student;
@@ -35,15 +33,14 @@ public class Bill {
 
     public Bill(String bill_ID, String student_ID,
                 String bill_NAME,
-                float room_money, float water_money, float total_money,
-                Date collection_date) {
+                float room_money, float water_money, float total_money
+                ) {
         Bill_ID = bill_ID;
         Student_ID = student_ID;
         Bill_NAME = bill_NAME;
         Room_money = room_money;
         Water_money = water_money;
         Total_money = total_money;
-        Collection_date = collection_date;
     }
 
     public String getBill_ID() {
@@ -94,11 +91,4 @@ public class Bill {
         Total_money = total_money;
     }
 
-    public Date getCollection_date() {
-        return Collection_date;
-    }
-
-    public void setCollection_date(Date collection_date) {
-        Collection_date = collection_date;
-    }
 }
