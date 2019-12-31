@@ -20,10 +20,12 @@ public class AppMain {
      * @param args
      */
     public static void main(String[] args) {
-        RoomIT rit = new RoomIT();
+        StudentIT rit = new StudentIT();
         rit.openSSF();;
-        rit.addRoom("1", "1", 1, 12);
-        rit.searchRoom("1");
+//        Student blah blah tu them
+//        tuong tu vs cac cai khac
+//        nho co open SSF va close SSF
+//        da co student dau ma run :))
         rit.closeSSF();
     }
 }
