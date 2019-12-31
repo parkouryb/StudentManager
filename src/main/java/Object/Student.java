@@ -163,6 +163,14 @@ public class Student {
     public void setPhone_Number(String phone_Number) {
         Phone_Number = phone_Number;
     }
+    
+    public void setStatus(String status) {
+		Status = status;
+	}
+    
+    public String getStatus() {
+		return Status;
+	}
 
     public void setStatus(String status) {
 		Status = status;

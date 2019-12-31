@@ -67,6 +67,19 @@ public class AccountIT {
         if (flag) System.out.println("Registion completed!");
         else System.out.println("Registion incomplete!");
     }
+    public static void addAccount(Account acc) {
+    	String sqlString = "INSERT INTO account(username, password) VALUES(?,?)";
+    	try {
+    		PreparedStatement ps =	sqlConnection.getconnection().prepareStatement(sqlString);
+    		ps.setString(1, acc.getUsername());
+    		ps.setString(2, acc.getPassword());
+    		ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+
 
     /**
      * List all accounts in the database

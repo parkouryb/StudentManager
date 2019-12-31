@@ -1,5 +1,6 @@
 package Interactive;
 
+import Object.Manager;
 import Object.Student;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -9,13 +10,76 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.Date;
 import java.util.List;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class StudentIT {
 
     static SessionFactory sessionFactoryObj;
 
     public void openSSF() {
+    /**
+     * Add a student to the database
+     * @param student_ID
+     * @param contract_ID
+     * @param room_ID
+     * @param name
+     * @param gender
+     * @param birthday
+     * @param hometown
+     * @param course
+     * @param faculty
+     * @param educational_System
+     * @param phone_Number
+     */
+
+    public static void addManager(Manager mg) {
+    	String sqlString = "INSERT INTO manager(Manager_ID, Birthday, Gender, Name, Position) VALUES(?,?,?,?,?)";
+    	try {
+    		PreparedStatement ps =	sqlConnection.getconnection().prepareStatement(sqlString);
+			ps.setString(1, mg.getManager_ID());
+			java.sql.Date cal = new java.sql.Date (mg.getBirthday().getTime()) ;
+			ps.setDate(2, cal);
+			ps.setString(3, mg.getGender());
+			ps.setString(4, mg.getName());
+			ps.setString(5, mg.getPosition());
+
+			ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+
+    public static void addStudent(Student std) {
+        String sqlString = "INSERT INTO student(Student_ID, Name, Gender, Birthday, Educational_System,"
+                + "Faculty, Hometown,Phone_Number, Room_ID, Contract_ID, Course, Status)"
+                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps =	sqlConnection.getconnection().prepareStatement(sqlString);
+            ps.setString(1, std.getStudent_ID());
+            ps.setString(2, std.getName());
+            ps.setString(3, std.getGender());
+            java.sql.Date cal = new java.sql.Date (std.getBirthday().getTime()) ;
+            ps.setDate(4, cal);
+            ps.setString(5, std.getEducational_System());
+            ps.setString(6, std.getFaculty());
+            ps.setString(7, std.getHometown());
+            ps.setString(8, std.getPhone_Number());
+            ps.setString(9, std.getRoom_ID());
+            ps.setString(10, std.getContract_ID());
+            ps.setInt(11, std.getCourse());
+            ps.setString(12, std.getStatus());
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+
+    public void addStudent_hbn(Student new_student) {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
