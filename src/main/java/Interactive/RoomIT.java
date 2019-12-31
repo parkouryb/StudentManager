@@ -7,6 +7,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.Date;
 import Object.Room;
+import org.hibernate.SessionFactory;
 
 public class RoomIT {
     static SessionFactory sessionFactoryObj;

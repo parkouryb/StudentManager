@@ -101,8 +101,8 @@ public class addManagerForm extends JFrame implements ActionListener{
 			acc.setUsername(userNameTF.getText());
 			acc.setPassword(passwordTF.getText());
 			sqlConnection.getconnection();
-			StudentIT.addManager(mg);
-			AccountIT.addAccount(acc);
+//			StudentIT.addManager(mg);
+//			AccountIT.addAccount(acc);
 			showMess("Adding successfully!");
 		}
 	}

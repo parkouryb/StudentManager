@@ -570,9 +570,13 @@ public class addStudentForm extends JFrame implements ActionListener {
 			std.setStatus(statusTF.getText());
 			
 			sqlConnection.getconnection();
-			StudentIT sit = new StudentIT();
-			sit.addStudent_hbn(std);
-//			StudentIT.addStudent(std);
+//			StudentIT sit = new StudentIT();
+//			sit.openSSF();
+//
+//			sit.addStudent_hbn(std);
+//
+//			sit.closeSSF();
+			StudentIT.addStudent(std);
 			showMess("Adding successfully!");
 			check = true;
 		}

@@ -7,8 +7,11 @@ import org.hibernate.cfg.Configuration;
 
 import Object.Manager;
 import java.util.Date;
+import org.hibernate.SessionFactory;
 
 public class ManagerIT {
+    static SessionFactory sessionFactoryObj;
+
     public void addManager(String manager_ID, String name, Date birthday, String gender, String position) {
         try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();

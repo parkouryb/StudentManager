@@ -19,37 +19,11 @@ public class StudentIT {
     static SessionFactory sessionFactoryObj;
 
     public void openSSF() {
-    /**
-     * Add a student to the database
-     * @param student_ID
-     * @param contract_ID
-     * @param room_ID
-     * @param name
-     * @param gender
-     * @param birthday
-     * @param hometown
-     * @param course
-     * @param faculty
-     * @param educational_System
-     * @param phone_Number
-     */
-
-    public static void addManager(Manager mg) {
-    	String sqlString = "INSERT INTO manager(Manager_ID, Birthday, Gender, Name, Position) VALUES(?,?,?,?,?)";
-    	try {
-    		PreparedStatement ps =	sqlConnection.getconnection().prepareStatement(sqlString);
-			ps.setString(1, mg.getManager_ID());
-			java.sql.Date cal = new java.sql.Date (mg.getBirthday().getTime()) ;
-			ps.setDate(2, cal);
-			ps.setString(3, mg.getGender());
-			ps.setString(4, mg.getName());
-			ps.setString(5, mg.getPosition());
-
-			ps.executeUpdate();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+        try {
+            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void addStudent(Student std) {
@@ -79,21 +53,13 @@ public class StudentIT {
         }
     }
 
-    public void addStudent_hbn(Student new_student) {
-        try {
-            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public void closeSSF() {
         if (sessionFactoryObj != null) {
             sessionFactoryObj.close();
         }
     }
 
-    public void addStudent(Student new_student) {
+    public void addStudent_hbn(Student new_student) {
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;

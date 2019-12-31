@@ -172,14 +172,6 @@ public class Student {
 		return Status;
 	}
 
-    public void setStatus(String status) {
-		Status = status;
-	}
-
-    public String getStatus() {
-		return Status;
-	}
-
     @Override
     public String toString() {
         return "Student{" +

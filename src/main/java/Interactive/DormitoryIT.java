@@ -9,7 +9,7 @@ import Object.Dormitory;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.hibernate.SessionFactory;
 public class DormitoryIT {
     static SessionFactory sessionFactoryObj;
     public void addDorm(String dorm_name, String location, String phone_number) {
