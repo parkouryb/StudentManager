@@ -1,15 +1,14 @@
 # StudentManager
-Cách dùng code trong Interactive:  
+Để có thể chạy code này thì làm theo các bước sau:  
+Bước 1 : Mở database, kiểm tra lại port, password của db  
+	vì hệ db lưu trữ của project  
+	là mysql nên rất thông cảm mọi người check lại.  
+Bước 2 : tạo database theo tên studentmanager, mặc dù dùng hibernate  
+	song tính năng auto tạo bảng chính vẫn gặp lỗi và đang được   
+	update, sau đó chạy các lệnh SQL trong file studentmanager.sql ở trên  
+Bước 3 : cách import Maven project in eclipse : https://stackoverflow.com/questions/2061094/importing-maven-project-into-eclipse  
+Bước 4 : sau khi maven đã tải hết các package cần thiết thì có chạy project bằng   
+	file LoginForm trong package Main. account thì có thể xem trong database  
+NOTE: Hiện tại mới chỉ update được tính năng addStudent, ngoài ra các tính năng khác hiện tại đang  đóng băng. Rất xin lỗi vì sự   bất tiện này.   
   
-ObjectIT name_of_objIT = new ObjectIT();  
-name_of_objIT.openSSF(); // mo cong ssf  
-.  
-.  
-.  
-đây là cái đoạn bạn dùng all function trong cái objectIT bạn tạo, chủ yếu để code k ngu si dù nó vẫn   
-ngu si như bth.   
-.  
-.  
-.  
-name_of_objIT.closeSSF(); // dong cong ssf  
-K mở hay k đóng là lỗi chết đấy.  
+Cảm ơn đã ghé qua đây!!!  
