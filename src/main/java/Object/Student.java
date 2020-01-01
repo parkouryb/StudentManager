@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 @Entity
@@ -56,7 +58,27 @@ public class Student {
     public Student() {
 
     }
-
+    
+    public Student (String student_ID, String room_ID ,String demo) {
+    	this.Student_ID = student_ID;
+        this.Contract_ID = demo;
+        this.Room_ID = room_ID;
+        this.Name = demo;
+        this.Gender = demo;
+        try {
+			this.Birthday = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        this.Hometown = demo;
+        this.Course = 0;
+        this.Faculty = demo;
+        this.Educational_System = demo;
+        this.Phone_Number = demo;
+        this.Status = demo;
+    }
+    
     public Student(String student_ID, String contract_ID, String room_ID,
                    String name, String gender, Date birthday,
                    String hometown,

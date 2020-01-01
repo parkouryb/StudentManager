@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.*;
 
+import java.sql.PreparedStatement;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -68,18 +69,19 @@ public class AccountIT {
         else System.out.println("Registion incomplete!");
     }
 
-//    public static void addAccount(Account acc) {
-//    	String sqlString = "INSERT INTO account(username, password) VALUES(?,?)";
-//    	try {
-//    		PreparedStatement ps =	sqlConnection.getconnection().prepareStatement(sqlString);
-//    		ps.setString(1, acc.getUsername());
-//    		ps.setString(2, acc.getPassword());
-//    		ps.executeUpdate();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
-//    }
+    public void addAccount(Account acc) {
+    	String sqlString = "INSERT INTO account(username, password) VALUES(?,?)";
+    	try {
+    		PreparedStatement ps =	sqlConnection.getconnection().prepareStatement(sqlString);
+    		ps.setString(1, acc.getUsername());
+    		ps.setString(2, acc.getPassword());
+    		ps.executeUpdate();
+		} 
+    	catch (Exception e) {
+		// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
 
 
     /**
@@ -108,7 +110,13 @@ public class AccountIT {
      * @param username
      * @param password
      */
-    public void Login(String username, String password) {
+    public boolean Login(String username, String password) {
+    	boolean check = false;
+        try {
+            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
 
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
@@ -120,6 +128,7 @@ public class AccountIT {
 
             if (username.compareTo(account.getUsername()) == 0 &&
                 password.compareTo(account.getPassword()) == 0) {
+            	check = true;
                 System.out.println("Login ok");
             }
             else {
@@ -131,6 +140,10 @@ public class AccountIT {
             sessionObj.close();
         }
 
+        if (sessionFactoryObj != null) {
+            sessionFactoryObj.close();
+        }
+        return check;
     }
 
     /**

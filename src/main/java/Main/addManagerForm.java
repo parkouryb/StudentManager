@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Interactive.AccountIT;
+import Interactive.ManagerIT;
 import Interactive.StudentIT;
 import Interactive.sqlConnection;
-import Interactive.sqlManager;
 import Object.Account;
 import Object.Manager;
 
@@ -75,14 +75,16 @@ public class addManagerForm extends JFrame implements ActionListener{
 	}
 	
 	public void submitNewManager() throws Exception{
-		sqlManager sqlmg = new sqlManager();
+		AccountIT accIT = new AccountIT();
+		ManagerIT mgIT = new ManagerIT();
 		Manager mg = new Manager();
 		Account acc = new Account();
-		if(sqlmg.idExited(id_managerTF.getText())){
+		
+		if(mgIT.idExited(id_managerTF.getText())){
 			showMess("ID exited!");
         }
 		
-		else if(sqlmg.userExited(userNameTF.getText())) {
+		else if(mgIT.userExited(userNameTF.getText())) {
 			showMess("Username exited!");
 		}
 		else if(id_managerTF.getText().length() == 0 || name_managerTF.getText().length() == 0 
@@ -101,8 +103,8 @@ public class addManagerForm extends JFrame implements ActionListener{
 			acc.setUsername(userNameTF.getText());
 			acc.setPassword(passwordTF.getText());
 			sqlConnection.getconnection();
-//			StudentIT.addManager(mg);
-//			AccountIT.addAccount(acc);
+			mgIT.addManager(mg);
+			accIT.addAccount(acc);
 			showMess("Adding successfully!");
 		}
 	}
