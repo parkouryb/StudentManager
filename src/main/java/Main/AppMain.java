@@ -28,12 +28,6 @@ public class AppMain {
         for (int i = 1;i <= 50;++ i) {
             ait.Registration("admin" + i, "1", "1");
         }
-        for (int i = 1;i <= 50;++ i) {
-            rit.addRoom("B" + i, "1", 3000, 12);
-            rit.addRoom("A" + 50 + i, "1", 5000, 8);
-
-        }
-
         rit.closeSSF();
         ait.closeSSF();
 
