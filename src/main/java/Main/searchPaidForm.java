@@ -24,8 +24,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import Interactive.StudentIT;
 import Interactive.sqlConnection;
-import Interactive.sqlMoney;
 
 public class searchPaidForm extends JFrame implements ActionListener {
 
@@ -40,10 +40,9 @@ public class searchPaidForm extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public searchPaidForm() {
+		super("Find my Money");
 		setFont(new Font("Times New Roman", Font.BOLD, 12));
 		setForeground(Color.BLACK);
-		setTitle("Find my Money");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 522, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -85,7 +84,7 @@ public class searchPaidForm extends JFrame implements ActionListener {
 			new Object[][] {
 			},
 			new String[] {
-				"Student_ID", "Name", "Room", "Phone"
+				"Student_ID", "Name", "Room", "Money" ,"Phone"
 			}
 		));
 		scrollPane.setViewportView(table);
@@ -198,8 +197,9 @@ public class searchPaidForm extends JFrame implements ActionListener {
 		}
 		else {
 			sqlConnection.getconnection();
-			sqlMoney money = new sqlMoney();
-			ResultSet rs = money.getNoMoneyStudent(searchTF.getText());
+			StudentIT stdIT = new StudentIT();
+			
+			ResultSet rs = stdIT.getStatus(searchTF.getText());
 			loadTable(rs);
 		}
 	}
@@ -217,14 +217,14 @@ public class searchPaidForm extends JFrame implements ActionListener {
         
         try {
             int dem = 0;
-            String[][] arr = new String[rows][4];
+            String[][] arr = new String[rows][5];
             while(rs.next()){
-                for(int i = 0; i < 4;i++){
+                for(int i = 0; i < 5;i++){
                     arr[dem][i] = rs.getString(i+1);
                 }
                 dem++;
             }
-            String[][] arr1 = new String[dem][4];
+            String[][] arr1 = new String[dem][5];
             arr1 = arr;
             data1 = arr1;
             
@@ -234,7 +234,7 @@ public class searchPaidForm extends JFrame implements ActionListener {
         table.setModel(new DefaultTableModel(
     			data1,
     			new String[] {
-    				"Student_ID", "Name", "Room", "Phone"
+    				"Student_ID", "Name", "Room", "Money" ,"Phone"
     			}
     		));
 	}

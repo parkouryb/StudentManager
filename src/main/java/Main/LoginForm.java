@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Interactive.GetPassword;
+import Interactive.AccountIT;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -22,9 +22,14 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class LoginForm extends JFrame implements ActionListener {
-
 	private JPanel contentPane;
 	private JTextField passwordTF;
 	private JTextField userTF;
@@ -153,15 +158,14 @@ public class LoginForm extends JFrame implements ActionListener {
 			System.exit(0);
 		}
 		else if(btn.equals(loginBtn)) {
+			AccountIT accIT = new AccountIT();
 			String taikhoan = userTF.getText();	
 			String matkhau = passwordTF.getText();
-			System.out.print(GetPassword.getlogin(taikhoan,matkhau));
 			
-			if(GetPassword.getlogin(taikhoan,matkhau)== true)
-			{
+			if(accIT.Login(taikhoan,matkhau)) {
 				MainForm main = new MainForm();
-                main.setVisible(true);
-			}
+				main.setVisible(true);
+			}	
 			else
 			{
 				showMess("Please check your user or password!");

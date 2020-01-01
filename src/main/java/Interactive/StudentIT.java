@@ -11,6 +11,9 @@ import org.hibernate.cfg.Configuration;
 import java.util.Date;
 import java.util.List;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -25,8 +28,68 @@ public class StudentIT {
             ex.printStackTrace();
         }
     }
-
-    public static void addStudent(Student std) {
+    
+    public ResultSet getStatus(String status) {
+		ResultSet rs = null;
+		String sqlCommand = "SELECT student.Student_ID,student.Name,student.Room_ID,room.Room_money,"
+				+ "student.Phone_Number FROM student,room WHERE student.Room_ID = room.Room_ID and status LIKE '%"
+				+ status + "%'";
+		PreparedStatement pst;
+		try {
+			pst = sqlConnection.getconnection()
+					.prepareStatement(sqlCommand,
+							ResultSet.TYPE_SCROLL_SENSITIVE,
+							ResultSet.CONCUR_READ_ONLY);
+			rs = pst.executeQuery();
+		} catch (SQLException ex) {
+			System.out.println("search err " + ex.toString());
+		}
+		return rs;
+	}
+    
+    public boolean idstudentExited(String id) {
+		boolean check = false;
+		List<String> idList = new ArrayList<String>();
+		String id1 = null;
+		ResultSet rs = null;
+		String sqlCommand = "SELECT Student_ID FROM student " ;
+		Statement pst;
+		try {
+			pst = sqlConnection.getconnection().createStatement();
+			rs = pst.executeQuery(sqlCommand);
+			while (rs.next()) {
+				id1 = rs.getString(1);
+				idList.add(id1);
+			}
+		} catch (SQLException ex) {
+			System.out.println("search err " + ex.toString());
+		}
+		for(String idString : idList) {
+			if(idString.equals(id)) {
+				check = true;
+				break;
+			}
+		}
+		return check;
+	}
+    
+    public boolean courseEx(String courseString) {
+		try{
+            Integer.parseInt(courseString);
+            return true;
+              
+        }
+		catch(StringIndexOutOfBoundsException e){
+            System.out.println("ERR: Ban quen chua nhap!");
+            return false;
+        }
+        catch(NumberFormatException e){
+            System.out.println("ERR: Sai kieu!");
+            return false;
+        }
+	}
+    
+    public void addStudent(Student std) {
         String sqlString = "INSERT INTO student(Student_ID, Name, Gender, Birthday, Educational_System,"
                 + "Faculty, Hometown,Phone_Number, Room_ID, Contract_ID, Course, Status)"
                 + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";

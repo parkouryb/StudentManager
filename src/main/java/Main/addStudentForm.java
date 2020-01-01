@@ -23,9 +23,11 @@ import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
 
+import Interactive.ContractIT;
+import Interactive.RoomIT;
 import Interactive.StudentIT;
 import Interactive.sqlConnection;
-import Interactive.sqlStudent;
+
 import Object.Contract;
 import Object.Student;
 
@@ -34,7 +36,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
-import Interactive.sqlStudent;
+
 
 public class addStudentForm extends JFrame implements ActionListener {
 
@@ -532,19 +534,21 @@ public class addStudentForm extends JFrame implements ActionListener {
 	
 	public void apply1Action() throws Exception {
 		boolean check = false;
-		sqlStudent sqlstd = new sqlStudent();
+		StudentIT stdIT = new StudentIT();
 		Student std = new Student();
+		RoomIT roomIT = new RoomIT();
+		ContractIT contractIT = new ContractIT();
 		
-		if(sqlstd.idstudentExited(student_idTF.getText())) {
+		if(stdIT.idstudentExited(student_idTF.getText())) {
 			showMess("This Student ID exited!");
 		}
-		else if(sqlstd.contractExited(contract_idTF.getText())) {
+		else if(contractIT.contractExited(contract_idTF.getText())) {
 			showMess("This Contract ID exited!");
 		}
-		else if(sqlstd.fullOfRoom(room_idTF.getText())) {
+		else if(roomIT.fullOfRoom(room_idTF.getText())) {
 			showMess("This room is full!");
 		}
-		else if(sqlstd.courseEx(courseTF.getText()) == false) {
+		else if(stdIT.courseEx(courseTF.getText()) == false) {
 			showMess("Course is a number!");
 		}
 		else if(student_idTF.getText().length() == 0 || nameTF.getText().length() == 0 ||
@@ -576,7 +580,7 @@ public class addStudentForm extends JFrame implements ActionListener {
 //			sit.addStudent_hbn(std);
 //
 //			sit.closeSSF();
-			StudentIT.addStudent(std);
+			stdIT.addStudent(std);
 			showMess("Adding successfully!");
 			check = true;
 		}
@@ -589,6 +593,8 @@ public class addStudentForm extends JFrame implements ActionListener {
 	
 	public void apply2Action() throws Exception {
 		Contract ctr = new Contract();
+		ContractIT contractIT = new ContractIT();
+		
 		if(dayinTF.getText().length() == 0 || dayoutTF.getText().length() ==0) {
 			showMess("Please fill out your form!");
 		}
@@ -598,7 +604,7 @@ public class addStudentForm extends JFrame implements ActionListener {
 			ctr.setDay_out(new SimpleDateFormat("dd/MM/yyyy").parse(dayoutTF.getText()));
 			
 			sqlConnection.getconnection();
-			sqlStudent.addContract(ctr);
+			contractIT.addContract(ctr);
 			showMess("Adding successfully!");
 		}
 	}
