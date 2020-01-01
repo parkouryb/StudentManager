@@ -19,21 +19,17 @@ public class AppMain {
      *
      * @param args
      */
-    public static void DataTest() {
+    public void DataTest() {
         AccountIT ait = new AccountIT();
-        RoomIT rit = new RoomIT();
-        rit.openSSF();
         ait.openSSF();
-
         for (int i = 1;i <= 50;++ i) {
             ait.Registration("admin" + i, "1", "1");
         }
-        rit.closeSSF();
         ait.closeSSF();
 
     }
 
     public static void main(String[] args) {
-        DataTest();
+
     }
 }

@@ -35,12 +35,16 @@ public class LoginForm extends JFrame implements ActionListener {
 	private JTextField userTF;
 	private JButton loginBtn;
 	private JButton exitBtn;
-	
+
+
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		AppMain am = new AppMain();
+		am.DataTest();
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
