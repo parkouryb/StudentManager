@@ -22,10 +22,7 @@ public class AppMain {
     public static void main(String[] args) {
         StudentIT rit = new StudentIT();
         rit.openSSF();;
-//        Student blah blah tu them
-//        tuong tu vs cac cai khac
-//        nho co open SSF va close SSF
-//        da co student dau ma run :))
+
         rit.closeSSF();
     }
 }

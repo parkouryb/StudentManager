@@ -144,6 +144,7 @@ public class LoginForm extends JFrame implements ActionListener {
 		exitBtn.addActionListener(this);
 		loginBtn.addActionListener(this);
 	}
+	// cai nay la cai cua m ne, con cai login la t code giao dien thoi
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
