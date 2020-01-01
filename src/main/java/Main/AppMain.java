@@ -19,13 +19,27 @@ public class AppMain {
      *
      * @param args
      */
-    public static void main(String[] args) {
-        StudentIT rit = new StudentIT();
-        rit.openSSF();;
-//        Student blah blah tu them
-//        tuong tu vs cac cai khac
-//        nho co open SSF va close SSF
-//        da co student dau ma run :))
+    public static void DataTest() {
+        AccountIT ait = new AccountIT();
+        RoomIT rit = new RoomIT();
+        rit.openSSF();
+        ait.openSSF();
+
+        for (int i = 1;i <= 50;++ i) {
+            ait.Registration("admin" + i, "1", "1");
+        }
+        for (int i = 1;i <= 50;++ i) {
+            rit.addRoom("B" + i, "1", 3000, 12);
+            rit.addRoom("A" + 50 + i, "1", 5000, 8);
+
+        }
+
         rit.closeSSF();
+        ait.closeSSF();
+
+    }
+
+    public static void main(String[] args) {
+        DataTest();
     }
 }
