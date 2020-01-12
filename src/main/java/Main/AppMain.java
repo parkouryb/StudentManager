@@ -6,6 +6,7 @@ import java.io.*;
 
 import Interactive.*;
 import Object.*;
+import View.LoginForm;
 import com.jcg.hibernate.maven.*;
 import org.hibernate.*;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -22,7 +23,7 @@ public class AppMain {
     public void DataTest() {
         AccountIT ait = new AccountIT();
         ait.openSSF();
-        for (int i = 1;i <= 50;++ i) {
+        for (int i = 1;i <= 10;++ i) {
             ait.Registration("admin" + i, "1", "1");
         }
         ait.closeSSF();
@@ -30,6 +31,9 @@ public class AppMain {
     }
 
     public static void main(String[] args) {
-
+        AppMain ap = new AppMain();
+        ap.DataTest();
+        LoginForm login = new LoginForm();
+        login.setVisible(true);
     }
 }

@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -29,147 +30,158 @@ public class StudentIT {
             ex.printStackTrace();
         }
     }
-    
+
     public List<Student> getExpiredStudent(List<Contract> contracts){
-    	if(contracts == null) return null;
-    	else {
-    		List<Student> students = new ArrayList<Student>();
-    		Student newStudent = new Student();
-    		String idContract;
-    		for(int i = 0 ; i<contracts.size() ; i++) {
-    			idContract = contracts.get(i).getContract_ID();
-    			newStudent = searchStudentbyID(idContract);
-    			students.add(newStudent);
-    		}
-    		return students;
-    	}
+        if(contracts == null) return null;
+        else {
+            List<Student> students = new ArrayList<Student>();
+            Student newStudent = new Student();
+            String idContract;
+            for(int i = 0 ; i<contracts.size() ; i++) {
+                idContract = contracts.get(i).getContract_ID();
+                newStudent = searchStudentbyID(idContract);
+                students.add(newStudent);
+            }
+            return students;
+        }
     }
-    
+
     public List<String> getIdUnCooper(){
-    	
-    	//find all student
-    	ResultSet rs1 = null;
-    	String sqlString1 = "SELECT student.Student_ID FROM student";
-    	PreparedStatement pst1;
-    	int rows1 = 0;
-    	List<String> idList1 = new ArrayList<String>();
-    	try {
-			pst1 = sqlConnection.getconnection().prepareStatement(sqlString1);
-			rs1 = pst1.executeQuery();
-			while (rs1.next()) {
-				idList1.add(rs1.getString(1));
-			}
-		} catch (SQLException e) {
-			// TODO: handle exception
-		}
-    	rows1 = idList1.size();
-    	
-    	//find student who have contract
-    	ResultSet rs2 = null;
-    	String sqlString2 = "SELECT student.Student_ID FROM student, contract "
-    								+ "WHERE student.Student_ID = contract.Contract_ID";
-    	PreparedStatement pst2;
-    	int rows2 = 0;
-    	List<String> idList2 = new ArrayList<String>();
-    	try {
-			pst2 = sqlConnection.getconnection().prepareStatement(sqlString2);
-			rs2 = pst2.executeQuery();
-			while (rs2.next()) {
-				idList2.add(rs2.getString(1));
-			}
-		} catch (SQLException e) {
-			// TODO: handle exception
-		}
-    	rows2 = idList2.size();
-    	
-    	//List<String> idList = new ArrayList<String>();
-    	if(idList1.size() == 0)	return null;
-    	else {    		
-        	for(int i = 0 ; i < idList1.size(); i++) {
-        		for(int j = 0 ; j < idList2.size() ; j++) {
-        			if(idList1.get(i).equals(idList2.get(j))) {
-        				idList1.remove(i);
-        			}
-        		}
-        	}
-		}
-		return idList1;
+
+        //find all student
+        ResultSet rs1 = null;
+        String sqlString1 = "SELECT student.Student_ID FROM student";
+        PreparedStatement pst1;
+        int rows1 = 0;
+        List<String> idList1 = new ArrayList<String>();
+        try {
+            pst1 = sqlConnection.getconnection().prepareStatement(sqlString1);
+            rs1 = pst1.executeQuery();
+            while (rs1.next()) {
+                idList1.add(rs1.getString(1));
+            }
+        } catch (SQLException e) {
+            // TODO: handle exception
+        }
+        rows1 = idList1.size();
+
+        //find student who have contract
+        ResultSet rs2 = null;
+        String sqlString2 = "SELECT student.Student_ID FROM student, contract "
+                + "WHERE student.Student_ID = contract.Contract_ID";
+        PreparedStatement pst2;
+        int rows2 = 0;
+        List<String> idList2 = new ArrayList<String>();
+        try {
+            pst2 = sqlConnection.getconnection().prepareStatement(sqlString2);
+            rs2 = pst2.executeQuery();
+            while (rs2.next()) {
+                idList2.add(rs2.getString(1));
+            }
+        } catch (SQLException e) {
+            // TODO: handle exception
+        }
+        rows2 = idList2.size();
+
+        //List<String> idList = new ArrayList<String>();
+        if(idList1.size() == 0)	return null;
+        else {
+            for(int i = 0 ; i < idList1.size(); i++) {
+                for(int j = 0 ; j < idList2.size() ; j++) {
+                    if(idList1.get(i).equals(idList2.get(j))) {
+                        idList1.remove(i);
+                    }
+                }
+            }
+        }
+        return idList1;
     }
-    
+
     public List<Student> getStudentUnCooper(List<String> idList) {
-    	StudentIT studentIT = new StudentIT();
-    	List<Student> students = new ArrayList<Student>() ;
-    	for(int i = 0;i<idList.size();i++) {
-    		Student student = new Student();
-    		student = studentIT.searchStudentbyID(idList.get(i));
-    		students.add(student);
-    	}
-    	
-    	return students;
+        StudentIT studentIT = new StudentIT();
+        List<Student> students = new ArrayList<Student>() ;
+        for(int i = 0;i<idList.size();i++) {
+            Student student = new Student();
+            student = studentIT.searchStudentbyID(idList.get(i));
+            students.add(student);
+        }
+
+        return students;
     }
-    
+
     public boolean isPaidMoney(String id) {
-    	boolean check = false;
-    	StudentIT studentIT = new StudentIT();
-    	Student student = new Student();
-    	student = studentIT.searchStudentbyID(id);
-    	if(student.getStatus().equals("TRUE")) {
-    		check = true;
-    	}
-    	return check;
+        boolean check = false;
+        StudentIT studentIT = new StudentIT();
+        Student student = new Student();
+        student = studentIT.searchStudentbyID(id);
+        if(student.getStatus().equals("TRUE")) {
+            check = true;
+        }
+        return check;
     }
-    
+
     public ResultSet getStatus(String status) {
-		ResultSet rs = null;
-		String sqlCommand = "SELECT student.Student_ID,student.Name,student.Room_ID,room.Room_money,"
-				+ "student.Phone_Number FROM student,room WHERE student.Room_ID = room.Room_ID and status LIKE '%"
-				+ status + "%'";
-		PreparedStatement pst;
-		try {
-			pst = sqlConnection.getconnection()
-					.prepareStatement(sqlCommand,
-							ResultSet.TYPE_SCROLL_SENSITIVE,
-							ResultSet.CONCUR_READ_ONLY);
-			rs = pst.executeQuery();
-		} catch (SQLException ex) {
-			System.out.println("search err " + ex.toString());
-		}
-		return rs;
-	}
-    
+        ResultSet rs = null;
+        String sqlCommand = "SELECT student.Student_ID,student.Name,student.Room_ID,room.Room_money,"
+                + "student.Phone_Number FROM student,room WHERE student.Room_ID = room.Room_ID and status LIKE '%"
+                + status + "%'";
+        PreparedStatement pst;
+        try {
+            pst = sqlConnection.getconnection()
+                    .prepareStatement(sqlCommand,
+                            ResultSet.TYPE_SCROLL_SENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+            rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println("search err " + ex.toString());
+        }
+        return rs;
+    }
+
     public boolean idstudentExited(String id) {
-		boolean check = false;
-		List<String> idList = new ArrayList<String>();
-		String id1 = null;
-		ResultSet rs = null;
-		String sqlCommand = "SELECT Student_ID FROM student " ;
-		Statement pst;
-		try {
-			pst = sqlConnection.getconnection().createStatement();
-			rs = pst.executeQuery(sqlCommand);
-			while (rs.next()) {
-				id1 = rs.getString(1);
-				idList.add(id1);
-			}
-		} catch (SQLException ex) {
-			System.out.println("search err " + ex.toString());
-		}
-		for(String idString : idList) {
-			if(idString.equals(id)) {
-				check = true;
-				break;
-			}
-		}
-		return check;
-	}
-    
+        boolean check = false;
+        List<String> idList = new ArrayList<String>();
+        String id1 = null;
+        ResultSet rs = null;
+        String sqlCommand = "SELECT Student_ID FROM student " ;
+        Statement pst;
+        try {
+            pst = sqlConnection.getconnection().createStatement();
+            rs = pst.executeQuery(sqlCommand);
+            while (rs.next()) {
+                id1 = rs.getString(1);
+                idList.add(id1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("search err " + ex.toString());
+        }
+        for(String idString : idList) {
+            if(idString.equals(id)) {
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
+
+    public boolean dayEx(String dayString) {
+        boolean check = false;
+        try {
+            new SimpleDateFormat("dd/MM/yyyy").parse(dayString);
+            check = true;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return check;
+    }
+
     public boolean courseEx(String courseString) {
-		try{
+        try{
             Integer.parseInt(courseString);
             return true;
-              
+
         }
-		catch(StringIndexOutOfBoundsException e){
+        catch(StringIndexOutOfBoundsException e){
             System.out.println("ERR: Ban quen chua nhap!");
             return false;
         }
@@ -177,8 +189,8 @@ public class StudentIT {
             System.out.println("ERR: Sai kieu!");
             return false;
         }
-	}
-    
+    }
+
     public void addStudent(Student std) {
         String sqlString = "INSERT INTO student(Student_ID, Name, Gender, Birthday, Educational_System,"
                 + "Faculty, Hometown,Phone_Number, Room_ID, Contract_ID, Course, Status)"
@@ -213,7 +225,7 @@ public class StudentIT {
     }
 
     public void addStudent_hbn(Student new_student) {
-    	
+
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
 
@@ -265,7 +277,7 @@ public class StudentIT {
     }
 
     public Student searchStudentbyID(String StudentID) {
-    	try {
+        try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             ex.printStackTrace();
@@ -296,12 +308,12 @@ public class StudentIT {
      * @param student_ID
      */
     public void deleteStudent(String student_ID){
-    	try {
+        try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
-    	
+
         Session sessionObj = sessionFactoryObj.openSession();
         Transaction transaction = null;
 
