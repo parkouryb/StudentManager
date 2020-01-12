@@ -1,4 +1,9 @@
 # StudentManager
+Đây là project oop của nhóm mình gồm:  
+Vũ Hải Đăng  
+Trịnh Thị Cẩm Nhung  
+Hà Trung Hiếu  
+
 Để có thể chạy code này thì làm theo các bước sau:  
 Bước 1 : Mở database, kiểm tra lại port, password của db  
 	vì hệ db lưu trữ của project  
