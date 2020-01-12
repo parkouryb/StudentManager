@@ -33,29 +33,93 @@ public class RoomIT {
         }
     }
     
-    public ResultSet getBlankRoom() {
-		ResultSet rs = null;
-		String sqlCommand = "SELECT room.Room_ID, room.Room_money, room.Type_room , "
-									+ "COUNT(student.Room_ID), room.Number"
-						   +"FROM student,room" 
-				           +"WHERE room.Room_ID = student.Room_ID "
-				                  + "AND room.Number > "
-				                             + "(SELECT COUNT(student.Room_ID) FROM student, room"
-				                             +   "WHERE room.Room_ID = student.Room_ID)"
-                           +"GROUP BY student.Room_ID";
-				
-		PreparedStatement pst;
-		try {
-			pst = sqlConnection.getconnection()
-					.prepareStatement(sqlCommand,
-							ResultSet.TYPE_SCROLL_SENSITIVE,
-							ResultSet.CONCUR_READ_ONLY);
-			rs = pst.executeQuery();
-		} catch (SQLException ex) {
-			System.out.println("search err " + ex.toString());
+    public List<Room> getAllRoom(List<String> idList){
+    	int number;
+    	Room room = new Room();
+    	List<Room> rooms = new ArrayList<Room>();
+    	for(int i = 0 ;i<idList.size() ; i++) {
+    		room = searchRoom(idList.get(i));
+    		number = room.getNumber();
+    		room.setNumber(number - 1);
+    		rooms.add(room);
+    	}
+    	return rooms;
+    }
+    
+    public List<String> getListRoom(){
+    	List<String> idrooms = new ArrayList<String>();
+    	String id = null;
+    	String sqlString = "SELECT Room_ID FROM room";
+    	ResultSet rs = null;
+    	Statement statement;
+    	try {
+			statement = sqlConnection.getconnection().createStatement();
+			rs = statement.executeQuery(sqlString);
+			while(rs.next()) {
+				id = rs.getString(1);
+				idrooms.add(id);
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
-		return rs;
-	}
+    	
+    	return idrooms;
+    }
+    
+    public List<Room> getBlankRoom(List<String> idrooms){
+    	//find how many people in a room which id = roomID
+    		List<String> idList = new ArrayList<String>();
+    		String id1 = null;
+    		ResultSet rs = null;
+    		String sqlCommand = "SELECT Room_ID FROM student ";							
+    		Statement st;
+    		try {
+    			st = sqlConnection.getconnection().createStatement();
+    			rs = st.executeQuery(sqlCommand);
+    			while (rs.next()) {
+    				id1 = rs.getString(1);
+    				idList.add(id1);
+    			}
+			} catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+    	
+    	//find blank rooms		
+    	List<Room> BlankRooms = new ArrayList<Room>(); 
+    	int slot; 
+    	Room blankRoom = new Room();
+    	String room_id;
+    	boolean check;
+    	for(int i = 0 ; i<idrooms.size() ; i++) {
+    		room_id = idrooms.get(i);
+    		check = fullOfRoom(room_id);
+    		if(check == false) {
+    			int number = 0;
+    			for(int j = 0 ; j < idList.size() ; j++) {
+    				if(idList.get(j).equals(room_id)) number++;
+    			}
+    			blankRoom = searchRoom(room_id);
+    			slot = blankRoom.getNumber();
+    			blankRoom.setNumber(slot - number);
+    			BlankRooms.add(blankRoom);
+    		}
+    	}
+    	if(BlankRooms.size() == 0) return null;
+    	else return BlankRooms;
+    }
+    
+    public List<Room> genderBlankRooms (List<Room> blankRooms, String genderString){
+    	List<Room> genderRooms = new ArrayList<Room>();
+    	for(int i = 0 ; i<blankRooms.size() ; i++) {
+    		if(blankRooms.get(i).getType_room().equals(genderString)) {
+    			genderRooms.add(blankRooms.get(i));
+    		}
+    	}
+    	if(genderRooms.size() == 0) return null;
+    	else return genderRooms;
+    }
     
     public boolean fullOfRoom(String roomID) {
 		boolean check = false;
@@ -113,6 +177,7 @@ public class RoomIT {
 	}
     
     public void addRoom(Room room) {
+    	
     	try {
             sessionFactoryObj = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
@@ -201,7 +266,13 @@ public class RoomIT {
     }
     
     public Room searchRoom(String room_ID) {
-
+    	
+    	try {
+            sessionFactoryObj = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
+    	
         Session sessionObj = sessionFactoryObj.openSession();
         Room room = null;
         try {
