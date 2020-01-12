@@ -68,4 +68,11 @@ public class Room {
     public void setNumber(int number) {
 		Number = number;
 	}
+
+	@Override
+	public String toString() {
+		return "Room [Room_ID=" + Room_ID + ", Type_room=" + Type_room + ", Room_money=" + Room_money + ", Number="
+				+ Number + "]";
+	}
+    
 }

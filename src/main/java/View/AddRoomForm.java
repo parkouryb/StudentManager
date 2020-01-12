@@ -1,4 +1,4 @@
-package Main;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,8 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Interactive.ContractIT;
 import Interactive.RoomIT;
 import Interactive.StudentIT;
+import Object.Contract;
 import Object.Room;
 import Object.Student;
 
@@ -26,7 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
-public class addRoomForm extends JFrame implements ActionListener {
+public class AddRoomForm extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField room_idTF;
@@ -39,36 +41,20 @@ public class addRoomForm extends JFrame implements ActionListener {
 	private JButton resetBtn;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					addRoomForm frame = new addRoomForm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public addRoomForm() {
+	public AddRoomForm() {
 		super("Add a new room");
 		setBackground(new Color(255, 255, 0));
 		setResizable(false);
 		setBounds(100, 100, 497, 300);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 0, 0));
+		contentPane.setBackground(new Color(224, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 255, 0));
+		panel.setBackground(new Color(173, 255, 47));
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 0));
@@ -115,16 +101,16 @@ public class addRoomForm extends JFrame implements ActionListener {
 		typeTF.setColumns(10);
 		
 		maleBtn = new JButton("MALE");
-		maleBtn.setForeground(new Color(255, 255, 255));
-		maleBtn.setBackground(new Color(0, 255, 0));
+		maleBtn.setForeground(new Color(128, 0, 0));
+		maleBtn.setBackground(new Color(173, 255, 47));
 		
 		femaleBtn = new JButton("FEMALE");
-		femaleBtn.setForeground(new Color(255, 255, 255));
-		femaleBtn.setBackground(new Color(0, 255, 0));
+		femaleBtn.setForeground(new Color(128, 0, 0));
+		femaleBtn.setBackground(new Color(173, 255, 47));
 		
 		resetBtn = new JButton("RESET");
 		resetBtn.setBackground(new Color(255, 69, 0));
-		resetBtn.setForeground(new Color(255, 255, 0));
+		resetBtn.setForeground(new Color(255, 255, 255));
 		resetBtn.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		
 		submitBtn = new JButton("SUBMIT");
@@ -147,33 +133,33 @@ public class addRoomForm extends JFrame implements ActionListener {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(resetBtn, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(75)
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 								.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
 								.addComponent(panel_1, 0, 0, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(room_idTF)
-								.addComponent(moneyTF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(34)
-							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 262, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(femaleBtn, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(maleBtn, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
-								.addComponent(typeTF, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))))
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+										.addComponent(room_idTF)
+										.addComponent(moneyTF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addGap(34)
+									.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(femaleBtn, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(maleBtn, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
+										.addComponent(typeTF, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))))))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+					.addGap(37)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
@@ -221,7 +207,8 @@ public class addRoomForm extends JFrame implements ActionListener {
 		panel_1.add(lblRoomid);
 		
 		JLabel lblNewLabel = new JLabel("NEW ROOM");
-		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBackground(new Color(0, 0, 0));
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 30));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -264,6 +251,7 @@ public class addRoomForm extends JFrame implements ActionListener {
 	
 	public void submitAction() {
 		StudentIT stdIT = new StudentIT();
+		ContractIT contractIT = new ContractIT();
 		RoomIT roomIT = new RoomIT();
 		Room room = new Room();
 		
@@ -284,6 +272,8 @@ public class addRoomForm extends JFrame implements ActionListener {
 			String demo = "demo";
 			Student std = new Student(room_idTF.getText(),room_idTF.getText(), demo);
 			stdIT.addStudent(std);
+			Contract contract = new Contract(room_idTF.getText());
+			contractIT.addContract(contract);
 			showMess("Add new room successfully!");
 		}
 	}
@@ -299,3 +289,4 @@ public class addRoomForm extends JFrame implements ActionListener {
 		JOptionPane.showMessageDialog(this, msg);
 	}
 }
+

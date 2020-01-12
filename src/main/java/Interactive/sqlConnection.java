@@ -13,7 +13,7 @@ public class sqlConnection {
 	
 	private static String db_name = "studentmanager";
 	private static String user = "root";
-	private static String password = "root";
+	private static String password = "";
 	
 	private static String connectionURL = "jdbc:mysql://localhost/" + db_name + "?serverTimezone=UTC";
 	public static Connection getconnection()

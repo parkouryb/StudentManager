@@ -1,44 +1,38 @@
-package Main;
+package View;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.Window.Type;
-import java.awt.Dialog.ModalExclusionType;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JInternalFrame;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.JSeparator;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import Interactive.ContractIT;
 import Interactive.RoomIT;
 import Interactive.StudentIT;
 import Interactive.sqlConnection;
-
 import Object.Contract;
 import Object.Student;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.awt.event.ActionEvent;
-
-
-public class addStudentForm extends JFrame implements ActionListener {
+public class AddStudentForm extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField hometownTF;
@@ -72,10 +66,8 @@ public class addStudentForm extends JFrame implements ActionListener {
 	private JPanel panel_4;
 	private JPanel panel_5;
 	private JLabel lblContractid_1;
-	private JPanel panel_6;
-	private JLabel lblStudentid;
-	private JTextField contractTF;
 	private JTextField studentTF;
+	private JTextField contractTF;
 	private JLabel lblNewLabel;
 	private JLabel lblDayOut;
 	private JTextField dayinTF;
@@ -86,13 +78,18 @@ public class addStudentForm extends JFrame implements ActionListener {
 	private JButton contractBtn;
 	private JButton trueBtn;
 	private JButton falseBtn;
+	private JButton contract_idBtn;
+	private JPanel panel;
+	private JButton searchBtn;
+	private JPanel panel_1;
+	private JTable table;
 
 	
 	/**
 	 * Create the frame.
 	 */
 
-	public addStudentForm() {
+	public AddStudentForm() {
 		super("Add a new student");
 		setResizable(false);
 		setBounds(100, 100, 577, 578);
@@ -188,7 +185,9 @@ public class addStudentForm extends JFrame implements ActionListener {
 		room_idTF.setColumns(10);
 		
 		contract_idTF = new JTextField();
-		contract_idTF.setForeground(Color.BLACK);
+		contract_idTF.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		contract_idTF.setBackground(new Color(255, 255, 255));
+		contract_idTF.setForeground(new Color(0, 0, 0));
 		contract_idTF.setEditable(false);
 		contract_idTF.setColumns(10);
 		
@@ -199,6 +198,7 @@ public class addStudentForm extends JFrame implements ActionListener {
 		lblCourse.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		
 		statusTF = new JTextField();
+		statusTF.setBackground(new Color(255, 255, 255));
 		statusTF.setForeground(Color.BLACK);
 		statusTF.setEditable(false);
 		statusTF.setFont(new Font("Times New Roman", Font.BOLD, 14));
@@ -382,9 +382,11 @@ public class addStudentForm extends JFrame implements ActionListener {
 		lblDayOut.setFont(new Font("Times New Roman", Font.BOLD, 27));
 		
 		dayinTF = new JTextField();
+		dayinTF.setBackground(new Color(255, 255, 255));
 		dayinTF.setColumns(10);
 		
 		dayoutTF = new JTextField();
+		dayoutTF.setBackground(new Color(255, 255, 255));
 		dayoutTF.setColumns(10);
 		
 		applyBtn2 = new JButton("Apply");
@@ -437,57 +439,120 @@ public class addStudentForm extends JFrame implements ActionListener {
 		
 		panel_5 = new JPanel();
 		
-		panel_6 = new JPanel();
-		
-		lblStudentid = new JLabel("STUDENT_ID");
-		lblStudentid.setFont(new Font("Times New Roman", Font.BOLD, 17));
-		panel_6.add(lblStudentid);
+		studentTF = new JTextField();
+		studentTF.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		studentTF.setColumns(10);
 		
 		contractTF = new JTextField();
+		contractTF.setBackground(new Color(255, 255, 255));
+		contractTF.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		contractTF.setEditable(false);
 		contractTF.setColumns(10);
 		
-		studentTF = new JTextField();
-		studentTF.setEditable(false);
-		studentTF.setColumns(10);
+		contract_idBtn = new JButton("Contract_ID");
+		contract_idBtn.setBackground(new Color(124, 252, 0));
+		contract_idBtn.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_4.createSequentialGroup()
 					.addContainerGap()
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(contract_idBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+					.addGap(18)
 					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_4.createSequentialGroup()
-							.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(contractTF, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
-						.addGroup(gl_panel_4.createSequentialGroup()
-							.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(studentTF, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
+						.addComponent(studentTF, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(contractTF, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_4.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_4.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(contractTF, Alignment.LEADING)
-						.addComponent(panel_5, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(studentTF)
+						.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-						.addComponent(studentTF, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(contract_idBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(contractTF, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
-		lblContractid_1 = new JLabel("Contract_ID");
+		lblContractid_1 = new JLabel("Student_ID");
 		lblContractid_1.setFont(new Font("Times New Roman", Font.BOLD, 17));
 		panel_5.add(lblContractid_1);
 		panel_4.setLayout(gl_panel_4);
 		tab2.setLayout(gl_tab2);
+		
+		panel = new JPanel();
+		panel.setBackground(new Color(224, 255, 255));
+		topPane.addTab("Un-COOPERATED", null, panel, null);
+		
+		searchBtn = new JButton("SEARCH");
+		searchBtn.setBackground(new Color(255, 255, 0));
+		searchBtn.setFont(new Font("Times New Roman", Font.BOLD, 33));
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(159)
+							.addComponent(searchBtn, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(32)
+							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(29, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(searchBtn, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 353, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(35, Short.MAX_VALUE))
+		);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 472, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+		);
+		
+		table = new JTable();
+		table.setBackground(new Color(255, 255, 255));
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"STT" ,"Student_ID", "Name", "Phone"
+			}
+		));
+		table.setFillsViewportHeight(true);
+		table.setColumnSelectionAllowed(true);
+		table.setCellSelectionEnabled(true);
+		scrollPane.setViewportView(table);
+		panel_1.setLayout(gl_panel_1);
+		panel.setLayout(gl_panel);
+		contentPane.setLayout(gl_contentPane);
+		
 		applyBtn2.addActionListener(this);
 		resetBtn2.addActionListener(this);
-		contentPane.setLayout(gl_contentPane);
+		contract_idBtn.addActionListener(this);
+		searchBtn.addActionListener(this);
 	}
 
 
@@ -530,6 +595,53 @@ public class addStudentForm extends JFrame implements ActionListener {
 				contract_idTF.setText(student_idTF.getText());
 			}
 		}
+		else if (btn.equals(contract_idBtn)) {
+			checkTheContract();
+		}
+		else if (btn.equals(searchBtn)) {
+			searchAction();
+		}
+	}
+	
+	public void searchAction() {
+		StudentIT studentIT = new StudentIT();
+		List<String> idList = studentIT.getIdUnCooper();
+		System.out.println(idList);
+		if(idList == null) {
+			showMess("There is no Un-Cooperated!");
+		}
+		else {
+			List<Student> students = studentIT.getStudentUnCooper(idList);
+			loadTable(students);
+			showMess("Search successfully!");
+		}
+	}
+	
+	public void loadTable(List<Student> students) {
+		Object[][] dataObject = null;
+		int rows = students.size();
+		String[][] list = new String[rows][4];
+		int stt = 1;
+		for(int i = 0; i < rows ; i++) {
+			int dem = 0 ;
+			list[i][dem] = String.valueOf(stt);
+			dem++;
+			list[i][dem] = students.get(i).getStudent_ID(); 
+			dem++;
+			list[i][dem] = students.get(i).getName();
+			dem++;
+			list[i][dem] = students.get(i).getPhone_Number();
+			stt++;
+		}
+		String[][] list1 = new String[rows][4];
+		list1 = list;
+		dataObject = list1;
+		table.setModel(new DefaultTableModel(
+    			dataObject,
+    			new String[] {
+    				"STT" ,"Student_ID", "Name", "Phone"
+    			}
+    		));
 	}
 	
 	public void apply1Action() throws Exception {
@@ -550,6 +662,9 @@ public class addStudentForm extends JFrame implements ActionListener {
 		}
 		else if(stdIT.courseEx(courseTF.getText()) == false) {
 			showMess("Course is a number!");
+		}
+		else if (roomIT.idRoomExited(room_idTF.getText()) == false) {
+			showMess("This room doesn't existed." + "\n" + "Please try again!");
 		}
 		else if(student_idTF.getText().length() == 0 || nameTF.getText().length() == 0 ||
 				genderTF.getText().length() == 0 || schoolTF.getText().length() == 0 ||
@@ -574,20 +689,14 @@ public class addStudentForm extends JFrame implements ActionListener {
 			std.setStatus(statusTF.getText());
 			
 			sqlConnection.getconnection();
-//			StudentIT sit = new StudentIT();
-//			sit.openSSF();
-//
-//			sit.addStudent_hbn(std);
-//
-//			sit.closeSSF();
 			stdIT.addStudent(std);
 			showMess("Adding successfully!");
 			check = true;
 		}
 		
 		if(check) {
-			contractTF.setText(contract_idTF.getText());
-			studentTF.setText(student_idTF.getText());
+			studentTF.setText(contract_idTF.getText());
+			contractTF.setText(student_idTF.getText());
 		}
 	}
 	
@@ -595,11 +704,12 @@ public class addStudentForm extends JFrame implements ActionListener {
 		Contract ctr = new Contract();
 		ContractIT contractIT = new ContractIT();
 		
-		if(dayinTF.getText().length() == 0 || dayoutTF.getText().length() ==0) {
+		if(dayinTF.getText().length() == 0 || dayoutTF.getText().length() ==0
+			||	contractTF.getText().length() ==0) {
 			showMess("Please fill out your form!");
 		}
 		else {
-			ctr.setContract_ID(contractTF.getText());
+			ctr.setContract_ID(studentTF.getText());
 			ctr.setDay_in(new SimpleDateFormat("dd/MM/yyyy").parse(dayinTF.getText()));
 			ctr.setDay_out(new SimpleDateFormat("dd/MM/yyyy").parse(dayoutTF.getText()));
 			
@@ -619,7 +729,7 @@ public class addStudentForm extends JFrame implements ActionListener {
 		phoneTF.setText("");
 		hometownTF.setText("");
 		room_idTF.setText("");
-		contractTF.setText("");
+		studentTF.setText("");
 		courseTF.setText("");
 		statusTF.setText("");
 	}
@@ -629,7 +739,27 @@ public class addStudentForm extends JFrame implements ActionListener {
 		dayoutTF.setText("");
 	}
 	
+	public void checkTheContract() {
+		ContractIT ctrIt = new ContractIT();
+		Contract ctr = new Contract();
+		if(ctrIt.contractExited(studentTF.getText()) == false) {
+			showMess("This contract doesn't existed." + "\n" + "Please fill out your form!");
+			contractTF.setText(studentTF.getText());
+			dayinTF.setEditable(true);
+			dayoutTF.setEditable(true);
+		}
+		else {
+			showMess("Search successfully!");
+			ctr = ctrIt.searchContract(studentTF.getText());
+			dayinTF.setText((ctr.getDay_in()).toString());
+			dayoutTF.setText(ctr.getDay_out().toString());
+			dayinTF.setEditable(false);
+			dayoutTF.setEditable(false);
+		}
+	}
+	
 	public void showMess(String msg){
         JOptionPane.showMessageDialog(this, msg);
     }
+
 }
