@@ -152,9 +152,21 @@ public class LoginForm extends JFrame implements ActionListener {
 	private JLabel label3;
 	private JButton button2;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
-	
+
+	public void DataTest() {
+		AccountIT ait = new AccountIT();
+		ait.openSSF();
+		for (int i = 1;i <= 50;++ i) {
+			ait.Registration("admin" + i, "1", "1");
+		}
+		ait.closeSSF();
+
+	}
+
 	public static void main (String[] args) {
+
 		LoginForm login = new LoginForm();
+		login.DataTest();
 		login.setVisible(true);
 	}
 	
