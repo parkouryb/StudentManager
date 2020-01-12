@@ -43,10 +43,10 @@ public class LoginForm extends JFrame implements ActionListener {
 
 			// JFormDesigner evaluation mark
 			panel1.setBorder(new javax.swing.border.CompoundBorder(
-				new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-					"", javax.swing.border.TitledBorder.CENTER,
-					javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-					java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+					new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+							"", javax.swing.border.TitledBorder.CENTER,
+							javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+							java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
 			panel1.setLayout(null);
 
@@ -109,7 +109,7 @@ public class LoginForm extends JFrame implements ActionListener {
 		contentPane.add(panel1, BorderLayout.CENTER);
 		pack();
 		setLocationRelativeTo(getOwner());
-		
+
 		button1.addActionListener(this);
 		button2.addActionListener(this);
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -120,27 +120,27 @@ public class LoginForm extends JFrame implements ActionListener {
 		JButton btn = (JButton) e.getSource();
 		if(btn.equals(button1)) {
 			AccountIT accIT = new AccountIT();
-			String taikhoan = textField1.getText();	
+			String taikhoan = textField1.getText();
 			String matkhau = textField2.getText();
-			
+
 			if(accIT.Login(taikhoan,matkhau)) {
 				MainForm main = new MainForm();
 				main.setVisible(true);
-			}	
+			}
 			else
 			{
 				showMess("Please check your user or password!");
 			}
 		}
 		else if (btn.equals(button2)) {
-			
+			showMess("This function is updatinggg!" + "\n" + "Please try later!");
 		}
 	}
-	
+
 	public void showMess(String msg) {
 		JOptionPane.showMessageDialog(null, msg);
 	}
-	
+
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Nhung
 	private JPanel panel1;
@@ -153,21 +153,4 @@ public class LoginForm extends JFrame implements ActionListener {
 	private JButton button2;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 
-	public void DataTest() {
-		AccountIT ait = new AccountIT();
-		ait.openSSF();
-		for (int i = 1;i <= 50;++ i) {
-			ait.Registration("admin" + i, "1", "1");
-		}
-		ait.closeSSF();
-
-	}
-
-	public static void main (String[] args) {
-
-		LoginForm login = new LoginForm();
-		login.DataTest();
-		login.setVisible(true);
-	}
-	
 }
