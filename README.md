@@ -1,4 +1,4 @@
-# StudentManager 9.0 rồi :) 
+# StudentManager    
 Đây là project oop của nhóm mình gồm:  
 Vũ Hải Đăng  
 Trịnh Thị Cẩm Nhung  
