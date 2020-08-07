@@ -1,8 +1,8 @@
 # StudentManager    
 Đây là project oop của nhóm mình gồm:  
-Vũ Hải Đăng  
-Trịnh Thị Cẩm Nhung  
-Hà Trung Hiếu  
+* Vũ Hải Đăng  
+* Trịnh Thị Cẩm Nhung  
+* Hà Trung Hiếu  
 
 Để có thể chạy code này thì làm theo các bước sau:  
 Bước 1 : Mở database, kiểm tra lại port, password của db  
@@ -18,4 +18,4 @@ NOTE:
 * Nếu các bạn dùng eclipse thì nên mở file xml bằng text, k mở bằng file xml để sửa thông tin   connect Database.  
 * Hiện tại các chức năng tương đối đầy đủ và dùng được. Trừ sign up vẫn đang để xem nên làm gì   với nó.  
   
-Cảm ơn đã ghé qua đây!!!  
+Nếu các bạn có ý định pick project này làm project môn OOP thì nên code thêm cho nó hoàn thiện đồ họa. Cảm ơn vì tới đây <3
